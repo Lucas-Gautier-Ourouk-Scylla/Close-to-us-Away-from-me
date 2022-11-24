@@ -139,6 +139,8 @@ rm(list=setdiff(ls(), c("df"))) # clear workspace except the data frame
 
 ```
 
+Create composite scores
+
 ```{r}
 tmp <- df
 
@@ -159,13 +161,26 @@ tmp <- tmp %>%
 
 tmp <- tmp %>% 
   rowwise() %>%
-  mutate(Connection_Mean = mean(c((8-Similarity1), Similarity2, Similarity3, (8-Similarity4), (8-Similarity5), Similarity6, (8-Similarity7))))
+  mutate(Similarity_Mean = mean(c((8-Similarity1), Similarity2, Similarity3, (8-Similarity4), (8-Similarity5), Similarity6, (8-Similarity7))))
+
+df <- tmp
+
+rm(list=setdiff(ls(), c("df"))) # clear workspace except the data frame
 
 ```
 
 
 ```{r}
+tmp <- df
 
+Reg1 <- lm(Dependance_Mean~PESS_Mean, data = tmp)
+summary(Reg1)
+
+Reg2 <- lm(Connection_Mean~PESS_Mean, data = tmp)
+summary(Reg2)
+
+Reg3 <- lm(Similarity_Mean~PESS_Mean, data = tmp)
+summary(Reg3)
 ```
 
 Ctrl + Alt + I : nouveau chunk
