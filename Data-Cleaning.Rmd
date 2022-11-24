@@ -169,6 +169,7 @@ rm(list=setdiff(ls(), c("df"))) # clear workspace except the data frame
 
 ```
 
+Some testings regarding the link between PESS and interdependance to others (Using 3 different dimensions of the Vignoles et al. scale)
 
 ```{r}
 tmp <- df
