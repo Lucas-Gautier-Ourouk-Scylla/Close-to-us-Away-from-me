@@ -1,0 +1,17 @@
+version: 3.4.2
+server-time: 2022-11-23-16-02
+user_agent: mozilla/5.0 (windows nt 10.0; win64; x64; rv:78.0) gecko/20100101 firefox/78.0
+screen_width: 0
+screen_height: 0
+html_width: 0
+html_height: 0
+user_time: 0
+T: 0
+l: Experiment_Beginning
+stime: 2022-11-23-16-02
+T: 4433
+t: info
+l: DistanceSpatiale
+stime: 2022-11-23-16-14
+T: 734725
+t: experiment

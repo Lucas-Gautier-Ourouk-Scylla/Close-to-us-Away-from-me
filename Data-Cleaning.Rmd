@@ -5,26 +5,167 @@ date: '2022-11-24'
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+```{r}
+
+# Set Up environments
+
+cat("\014") # clear console
+rm(list=ls()) # clear workspace
+
+# Load packages
+
+# 4 lines : Installs (if necessary) and loads the packages you enter in the 1st row
+# 1st row : Creates a list of packages names that you want to use in the script (there is virtually no limit in how much package you can put here)
+# 2nd row : Creates a list of packages that have not been installed yet (new packages)
+# 3rd row : Installs the new packages
+# 4th row : Loads all the listed packages
+list.of.packages <- c("dplyr", "emmeans", "tidyverse", "readr", "psych", "lmerTest")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+invisible(lapply(list.of.packages, require, character.only = TRUE))
+
+rm(list=ls()) # clear workspace
+
+set.seed(42) # set overall random seed for reproducibility
 ```
 
-## R Markdown
+# Build the dataframe
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Questionnaire dataframe
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Independance/interdependance scale
 
-```{r cars}
-summary(cars)
+- Dependence1: I prefer to be self-reliant rather than depend on others.
+- Dependence2: I try not to depend on others. 
+- Dependence3: I prefer to turn to other people for help rather than solely rely on myself (inverse item)
+- Dependence4 :It is important for me to act as an independent person. 
+- Dependence5: I’m uncomfortable if I have to rely on myself. 
+- Dependence6: I am similar to the people close to me. (inverse item)
+- Dependence7: I feel my fate is intertwined with the fate of those around me. (inverse item)
+- Dependence8: It is important to consult close friends and get their ideas before making a decision. (inverse item)
+- Dependence9: I like sharing little things with my neighbours.(inverse item)
+
+
+```{r}
+tmp <- df <- read_csv("Data/data.csv")
+
+
+names(tmp)[1] <- "Participant"
+names(tmp)[2] <- "Exp_Name"
+names(tmp)[3] <- "Money_Pb1"
+names(tmp)[4] <- "Money_Pb2"
+names(tmp)[5] <- "Money_Pb3"
+names(tmp)[6] <- "Money_Pb4"
+names(tmp)[7] <- "Money_Pb5"
+names(tmp)[8] <- "Money_Pb6"
+names(tmp)[9] <- "Money_Pb7"
+names(tmp)[10] <- "Money_Pb8"
+names(tmp)[11] <- "Money_Pb9"
+names(tmp)[12] <- "Money_Pb10"
+names(tmp)[13] <- "SES_Subjective"
+
+
+# Independance/Interdependance scale
+
+## Self-reliance versus Dependence on others
+names(tmp)[14] <- "Dependence1" #(inverse item)
+names(tmp)[15] <- "Dependence2" #(inverse item)
+names(tmp)[16] <- "Dependence3" #(inverse item)
+names(tmp)[17] <- "Dependence4" 
+names(tmp)[18] <- "Dependence5" #(inverse item)
+names(tmp)[19] <- "Dependence6" 
+names(tmp)[20] <- "Dependence7" 
+names(tmp)[21] <- "Dependence8" 
+names(tmp)[22] <- "Dependence9" 
+
+# Self-containment versus Connection to others
+names(tmp)[23] <- "Connection1" #(inverse item)
+names(tmp)[24] <- "Connection2" #(inverse item)
+names(tmp)[25] <- "Connection3"
+names(tmp)[26] <- "Connection4" #(inverse item)
+names(tmp)[27] <- "Connection5"
+names(tmp)[28] <- "Connection6" 
+names(tmp)[29] <- "Connection7" #(inverse item)
+names(tmp)[30] <- "Connection8" 
+names(tmp)[31] <- "Connection9" 
+names(tmp)[32] <- "Connection10"
+names(tmp)[33] <- "Connection11" #(inverse item)
+names(tmp)[34] <- "Connection12" #(inverse item)
+names(tmp)[35] <- "Connection13"
+names(tmp)[36] <- "Connection14" #(inverse item)
+
+# Difference versus Similarity
+names(tmp)[37] <- "Similarity1" #(inverse item)
+names(tmp)[38] <- "Similarity2" 
+names(tmp)[39] <- "Similarity3"
+names(tmp)[40] <- "Similarity4" #(inverse item)
+names(tmp)[41] <- "Similarity5" #(inverse item)
+names(tmp)[42] <- "Similarity6" 
+names(tmp)[43] <- "Similarity7" #(inverse item)
+
+
+# PESS
+names(tmp)[44] <- "PESS1"
+names(tmp)[45] <- "PESS2" 
+names(tmp)[46] <- "PESS3" 
+names(tmp)[47] <- "PESS4" 
+names(tmp)[48] <- "PESS5" 
+names(tmp)[49] <- "PESS6" 
+names(tmp)[50] <- "PESS7" 
+names(tmp)[51] <- "PESS8" 
+
+names(tmp)[52] <- "Logement_Type"
+names(tmp)[53] <- "Logement_Type_Other" 
+names(tmp)[54] <- "Logement_Size" 
+names(tmp)[5] <- "Room_Nb" 
+names(tmp)[56] <- "Household_Nb" 
+names(tmp)[57] <- "Minors_Nb" 
+names(tmp)[58] <- "Share_Commons" 
+names(tmp)[59] <- "Town" 
+names(tmp)[60] <- "Country" 
+names(tmp)[61] <- "Study_Level" 
+names(tmp)[62] <- "CSP" 
+names(tmp)[63] <- "CSP_Other" 
+names(tmp)[64] <- "Age" 
+names(tmp)[65] <- "Gender" 
+names(tmp)[66] <- "Time_Start" 
+names(tmp)[67] <- "Time_End" 
+names(tmp)[68] <- "Time_Total" 
+
+df <- tmp
+
+rm(list=setdiff(ls(), c("df"))) # clear workspace except the data frame
+
 ```
 
-## Including Plots
+```{r}
+tmp <- df
 
-You can also embed plots, for example:
+tmp <-  tmp %>% 
+  rowwise() %>%
+  mutate(PESS_Mean = mean(c(PESS1, PESS2, PESS3, PESS4, PESS5, PESS6, PESS7, PESS8)))
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+# tmp <-  tmp %>% 
+#   mutate(PESS_Mean = mean(c(PESS1, PESS2, PESS3, PESS4, PESS5, PESS6, PESS7, PESS8)))
+
+tmp <- tmp %>% 
+  rowwise() %>%
+  mutate(Dependance_Mean = mean(c((8-Dependence1), (8-Dependence2), (8-Dependence3), Dependence4, (8-Dependence5), Dependence6, Dependence7, Dependence8, Dependence9)))
+
+tmp <- tmp %>% 
+  rowwise() %>%
+  mutate(Connection_Mean = mean(c((8-Connection1), (8-Connection2), Connection3, (8-Connection4), Connection5, Connection6, (8-Connection7), Connection8, Connection9, Connection10, (8-Connection11), (8-Connection12), Connection13, (8-Connection14))))
+
+tmp <- tmp %>% 
+  rowwise() %>%
+  mutate(Connection_Mean = mean(c((8-Similarity1), Similarity2, Similarity3, (8-Similarity4), (8-Similarity5), Similarity6, (8-Similarity7))))
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+
+```
+
+Ctrl + Alt + I : nouveau chunk
