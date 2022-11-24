@@ -36,15 +36,44 @@ set.seed(42) # set overall random seed for reproducibility
 
 Independance/interdependance scale
 
-- Dependence1: I prefer to be self-reliant rather than depend on others.
-- Dependence2: I try not to depend on others. 
-- Dependence3: I prefer to turn to other people for help rather than solely rely on myself (inverse item)
+- Dependence1: I prefer to be self-reliant rather than depend on others.(Reverse item)
+- Dependence2: I try not to depend on others. (Reverse item)
+- Dependence3: I prefer to turn to other people for help rather than solely rely on myself 
 - Dependence4 :It is important for me to act as an independent person. 
-- Dependence5: I’m uncomfortable if I have to rely on myself. 
-- Dependence6: I am similar to the people close to me. (inverse item)
-- Dependence7: I feel my fate is intertwined with the fate of those around me. (inverse item)
-- Dependence8: It is important to consult close friends and get their ideas before making a decision. (inverse item)
-- Dependence9: I like sharing little things with my neighbours.(inverse item)
+- Dependence5: I’m uncomfortable if I have to rely on myself. (Reverse item)
+- Dependence6: I am similar to the people close to me.
+- Dependence7: I feel my fate is intertwined with the fate of those around me. 
+- Dependence8: It is important to consult close friends and get their ideas before making a decision. 
+- Dependence9: I like sharing little things with my neighbours.
+
+
+Self-reliance versus Dependence on others
+
+- Connection1: I consider my happiness separate from the happiness of my friends and family. (Reverse item)
+- Connection2: It is important for me to be an accepted member of my family as well as my group of friends.
+- Connection3: I usually feel a strong sense of pride when someone in my family has an important accomplishment.
+- Connection4: When I think of myself, I often think of my close friends and family also.
+- Connection5: If a person hurts someone close to me, I feel personally hurt as well.
+- Connection6: My close relationships are unimportant to how I feel about myself. (Reverse item)
+- Connection7: My personal accomplishments are more important than maintaining my social relationships. (Reverse item)
+- Connection8: I see my close relationships as separate from who I am as an individual. (Reverse item)
+- Connection9: I usually feel a strong sense of pride when someone close to me has an important accomplishment.
+- Connection10: If a person insults a member of my family or my friends, I feel personally insulted myself.
+- Connection11: I always support a group decision even when I know it is wrong. (Reverse item)
+- Connection12: My role within my family gives me a sense of who I am. 
+- Connection13: I prefer to do what I want without letting my family or friends influence me. (Reverse item)
+- Connection14: My happiness depends very much on the happiness of those around me. 
+
+
+Difference versus Similarity
+
+- Similarity1: I am a unique individual. (Reverse item)
+- Similarity2: Being a unique individual is important to me. (Reverse item)
+- Similarity3: I am a unique person, separate from others. (Reverse item)
+- Similarity4: I enjoy being unique and different from others in many ways. (Reverse item)
+- Similarity5: Being different from others makes me uncomfortable
+- Similarity6: I avoid standing out among my friends.
+- Similarity7: I feel good when I cooperate with others. 
 
 
 ```{r}
@@ -81,29 +110,30 @@ names(tmp)[22] <- "Dependence9"
 
 # Self-containment versus Connection to others
 names(tmp)[23] <- "Connection1" #(inverse item)
-names(tmp)[24] <- "Connection2" #(inverse item)
+names(tmp)[24] <- "Connection2" 
 names(tmp)[25] <- "Connection3"
-names(tmp)[26] <- "Connection4" #(inverse item)
+names(tmp)[26] <- "Connection4" 
 names(tmp)[27] <- "Connection5"
-names(tmp)[28] <- "Connection6" 
+names(tmp)[28] <- "Connection6" #(inverse item)
 names(tmp)[29] <- "Connection7" #(inverse item)
-names(tmp)[30] <- "Connection8" 
+names(tmp)[30] <- "Connection8" #(inverse item)
 names(tmp)[31] <- "Connection9" 
 names(tmp)[32] <- "Connection10"
 names(tmp)[33] <- "Connection11" #(inverse item)
-names(tmp)[34] <- "Connection12" #(inverse item)
-names(tmp)[35] <- "Connection13"
-names(tmp)[36] <- "Connection14" #(inverse item)
+names(tmp)[34] <- "Connection12" 
+names(tmp)[35] <- "Connection13" #(inverse item)
+names(tmp)[36] <- "Connection14"
 
 # Difference versus Similarity
 names(tmp)[37] <- "Similarity1" #(inverse item)
-names(tmp)[38] <- "Similarity2" 
-names(tmp)[39] <- "Similarity3"
+names(tmp)[38] <- "Similarity2" #(inverse item)
+names(tmp)[39] <- "Similarity3" #(inverse item)
 names(tmp)[40] <- "Similarity4" #(inverse item)
-names(tmp)[41] <- "Similarity5" #(inverse item)
+names(tmp)[41] <- "Similarity5" 
 names(tmp)[42] <- "Similarity6" 
-names(tmp)[43] <- "Similarity7" #(inverse item)
+names(tmp)[43] <- "Similarity7" 
 
+warning("we need to check the constructvalidity of each scale before to build a mean composite score for each dimension of the interdependance/independance scale")
 
 # PESS
 names(tmp)[44] <- "PESS1"
@@ -157,11 +187,11 @@ tmp <- tmp %>%
 
 tmp <- tmp %>% 
   rowwise() %>%
-  mutate(Connection_Mean = mean(c((8-Connection1), (8-Connection2), Connection3, (8-Connection4), Connection5, Connection6, (8-Connection7), Connection8, Connection9, Connection10, (8-Connection11), (8-Connection12), Connection13, (8-Connection14))))
+  mutate(Connection_Mean = mean(c((8-Connection1), Connection2, Connection3, Connection4, Connection5, (8-Connection6), (8-Connection7), (8-Connection8), Connection9, Connection10, (8-Connection11), Connection12, (8-Connection13), Connection14)))
 
 tmp <- tmp %>% 
   rowwise() %>%
-  mutate(Similarity_Mean = mean(c((8-Similarity1), Similarity2, Similarity3, (8-Similarity4), (8-Similarity5), Similarity6, (8-Similarity7))))
+  mutate(Similarity_Mean = mean(c((8-Similarity1), (8-Similarity2), (8-Similarity3), (8-Similarity4), Similarity5, Similarity6, Similarity7)))
 
 df <- tmp
 
@@ -171,16 +201,7 @@ rm(list=setdiff(ls(), c("df"))) # clear workspace except the data frame
 
 
 ```{r}
-tmp <- df
 
-Reg1 <- lm(Dependance_Mean~PESS_Mean, data = tmp)
-summary(Reg1)
-
-Reg2 <- lm(Connection_Mean~PESS_Mean, data = tmp)
-summary(Reg2)
-
-Reg3 <- lm(Similarity_Mean~PESS_Mean, data = tmp)
-summary(Reg3)
 ```
 
 Ctrl + Alt + I : nouveau chunk
