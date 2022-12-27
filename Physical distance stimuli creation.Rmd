@@ -1,0 +1,291 @@
+---
+title: "Grid_Lucas"
+output: html_document
+date: '2022-06-30'
+---
+
+```{r}
+library(ggplot2)
+library(withr)
+library(NbClust)
+
+######################################################
+
+################   Randomly assign partiipants in a space 
+
+Nbppt <- 75
+
+Row<- c(1:Nbppt)
+
+Ordonnee <- with_seed(502, runif(Nbppt, -300, 300))
+Ordonnee
+
+Abscisse <- with_seed(53,runif(Nbppt, -400, 400))
+Abscisse
+
+df<- data.frame(Row, Abscisse, Ordonnee)
+
+ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+  geom_point(size=3,color=1, shape=23)
+
+sp<- ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+  geom_point(size=3,color=1, shape=23)
+
+sp + geom_density_2d()
+
+sp + stat_density_2d(aes(fill = ..level..), geom="polygon")+
+  scale_fill_gradient(low="blue", high="red")
+
+# geom_point(size, color, shape) # Pour changer la forme/couleur/taille des points du nuage
+
+######################
+
+######### Cluster analysis
+
+## Define the dataframe
+dataCA <- df[,c(2,3)]
+
+# How many clusters (statistical calculation) :
+# Methode k-means
+nckmeans <- NbClust(dataCA,min.nc=2,max.nc=10, method="kmeans") # meilleure solution = X groupes
+describe(nckmeans)
+# Methode de Ward
+ncward <- NbClust(dataCA,min.nc=2,max.nc=10, method="ward.D") # meilleure solution = X groupes
+
+
+###############################
+
+# Analyse en cluster (methode K-Means)
+fit2 <- kmeans(dataCA, 6) # solution en 6 clusters
+df$Clust2 <- fit2$cluster # Ajouter le numero de cluster pour chaque participant
+str(df)
+
+# Extraction des moyennes de chaque cluster sur les variables d'interet
+clus2 <- aggregate(dataCA,by=list(fit2$cluster),FUN=mean)
+round(clus2, 2)
+addmargins(table(df$Clust2)) # Repartition des participants (effectifs)
+round(addmargins(prop.table(table(df$Clust2))),2) # Repartition des participants (poucentages)
+
+# Voir graphiquement la répartition de chaque personne dans les cluster
+df$Clust2<- as.character(df$Clust2)
+ggplot(df, aes(x=Abscisse, y=Ordonnee, shape=Clust2, color=Clust2)) +
+  geom_point()
+
+sp <- ggplot(df, aes(x=Abscisse, y=Ordonnee, shape=Clust2, color=Clust2)) +
+  geom_point()
+
+sp + geom_density_2d()
+
+sp + stat_density_2d(aes(fill = ..level..), geom="polygon")+
+  scale_fill_gradient(low="blue", high="red")
+
+ # geom_density_2d() ou stat_density_2d()
+###############################
+# Analyse en cluster (methode K-Means)
+fit3 <- kmeans(dataCA, 4) # solution en 4 clusters
+df$Clust3 <- fit3$cluster # Ajouter le numero de cluster pour chaque participant
+str(df)
+
+# Extraction des moyennes de chaque cluster sur les variables d'interet
+clus3 <- aggregate(dataCA,by=list(fit3$cluster),FUN=mean)
+round(clus3, 2)
+addmargins(table(df$Clust3)) # Repartition des participants (effectifs)
+round(addmargins(prop.table(table(df$Clust3))),2) # Repartition des participants (poucentages)
+
+# Voir graphiquement la répartition de chaque personne dans les cluster
+df$Clust3<- as.character(df$Clust3)
+ggplot(df, aes(x=Abscisse, y=Ordonnee, shape=Clust3, color=Clust3)) +
+  geom_point()
+
+
+
+#############################################################################################
+
+################### Fixe a specific density between people on the map 
+minY<- -300
+maxY<- 300
+minX<- -400
+maxX<- 400
+
+Nbppt <- 75
+
+Row<- c(1:Nbppt)
+```
+
+
+```{r}
+
+Ordonnee <- with_seed(2, rnorm(Nbppt, mean = 186, sd = 117))
+Ordonnee
+
+Abscisse <- with_seed(3,rnorm(Nbppt, mean = 234, sd = 176))
+Abscisse
+
+df<- data.frame(Row, Abscisse, Ordonnee)
+
+ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+  geom_point(size=3,color=1, shape=23)
+Graph <- ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+  geom_point(size=3,color=1, shape=23)
+Graph + xlim(minX, maxX) + ylim(minY, maxY)
+Graph + geom_density_2d()
+
+# Ca marche pas tout à fait comme je le pensais... 
+# => les participantEs sont pas très bien répartiEs sur l'écran de 600x800 pixels
+
+
+
+
+
+
+# Pour une page cool sur les graphiques : 
+# http://sthda.com/french/wiki/ggplot2-nuage-de-points-guide-de-d-marrage-rapide-logiciel-r-et-visualisation-de-donn-es#nuage-de-points-simples
+
+```
+
+```{r}
+Ordonnee <- with_seed(3, rnorm(Nbppt, mean = 186, sd = 117))
+Ordonnee
+
+Abscisse <- with_seed(4,rnorm(Nbppt, mean = 234, sd = 176))
+Abscisse
+
+df<- data.frame(Row, Abscisse, Ordonnee)
+
+ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+  geom_point(size=3,color=1, shape=23)
+Graph <- ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+  geom_point(size=3,color=1, shape=23)
+Graph + xlim(minX, maxX) + ylim(minY, maxY)
+Graph + geom_density_2d()
+```
+
+```{r}
+for (i in 1:20) { 
+  Ordonnee <- with_seed(i, runif(Nbppt, -300, 300))
+  Abscisse <- with_seed(i+20,runif(Nbppt, -400, 400))
+  df<- data.frame(Abscisse, Ordonnee)
+  plot_gen <- ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+  geom_point(size=3,color=1, shape=23)
+  print(plot_gen)
+  
+}
+
+
+```
+
+
+```{r}
+myfunc <- function(id = 1:10) {
+  for (i in 1:100) { 
+  Ordonnee <- with_seed(i, runif(Nbppt, -300, 300))
+  Abscisse <- with_seed(i+20,runif(Nbppt, -400, 400))
+  x <- id
+  y <- data.frame(Row, Abscisse, Ordonnee)
+  plot_gen <- ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+  geom_point(size=3,color=1, shape=23) + geom_density_2d()
+  print(plot_gen)
+  }
+  df <- data.frame
+}
+
+
+```
+
+Best function
+Nbppt <- 75
+
+```{r}
+myfunc <- function(id = 1:100) {
+  setwd("~/Doctorat_pcfixe/Recherche/2022_DistanceClassesociale")
+  Ordonnee <- round(with_seed(i, runif(Nbppt, -300, 300)), 0)
+  Abscisse <- round(with_seed(i+1000,runif(Nbppt, -400, 400)), 0)
+  for(i in 1:length(id)){
+    x <- Abscisse
+    y <- Ordonnee
+    df <- data.frame(x, y)
+
+    plot_gen <- ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+  geom_point(size=3,color=1, shape=23) + ggtitle(paste0("Graph number ", i))
+    print(plot_gen)
+  colnames(df) <- c("abs","ord")
+  write.table(df, file = paste0("table", id[i], ".txt"), sep = "\t",row.names = FALSE)
+  ggsave(paste0("graphic_number", id[i], ".png"))
+
+  
+
+  }
+}
+
+myfunc(1:20)
+
+```
+
+
+
+```{r}
+myfunc_2 <- function(id = 1:100, i = 1:100) {
+  setwd("~/Doctorat_pcfixe/Recherche/2022_DistanceClassesociale")
+
+  for(i in 1:length(id)){
+    Ordonnee <- round(with_seed(i, runif(Nbppt, -300, 300)), 0)
+    Abscisse <- round(with_seed(i+1000,runif(Nbppt, -400, 400)), 0)
+    x <- Abscisse
+    y <- Ordonnee
+    df <- data.frame(x, y)
+    plot_gen <- ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+  geom_point(size=3,color=1, shape=23) + ggtitle(paste0("Graph number ", i))
+    print(plot_gen)
+  colnames(df) <- c("abs","ord")
+  write.table(df, file = paste0("table", id[i], ".txt"), sep = "\t",row.names = FALSE)
+  ggsave(paste0("graphic_number", id[i], ".png"))
+
+  
+
+  }
+}
+
+myfunc(1:20)
+
+```
+
+
+```{r}
+for (i in 1:20) { 
+  Ordonnee <- with_seed(i, runif(Nbppt, -300, 300))
+  Abscisse <- with_seed(i+2000,runif(Nbppt, -400, 400))
+  df<- data.frame(Abscisse, Ordonnee)
+  plot_gen <- ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+  geom_point(size=3,color=1, shape=23)
+  print(plot_gen)
+  
+}
+
+Nbppt <- 75
+
+
+myfunc_3 <- function(id = 1:100, i = 1:100) {
+  setwd("~/Doctorat_pcfixe/Recherche/2022_DistanceClassesociale")
+
+  for(i in 1:length(id)) {
+    Ordonnee <- round(with_seed(i, runif(Nbppt, -300, 300)),0)
+    Abscisse <-round(with_seed(i+2000,runif(Nbppt, -400, 400)), 0)
+    df<- data.frame(Abscisse, Ordonnee)
+    plot_gen <- ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+    geom_point(size=3,color=1, shape=23) + ggtitle(paste0("Graph number ", i))
+    print(plot_gen)
+    
+    colnames(df) <- c("abs","ord")
+    write.table(df, file = paste0("table", id[i], ".txt"), sep = "\t",row.names = FALSE)
+    ggsave(paste0("graphic_number", id[i], ".png"))
+
+  
+
+  }
+}
+
+myfunc_3(1:100)
+
+```
+
+
