@@ -1,76 +1,76 @@
-"abs"	"ord"	Clust2	Segregation	Seg_High	Seg_Medium	Seg_Low	Seg_No
--225	258	2	Green	Green	Green	Green	Orange
-195	-191	1	Orange	Orange	Orange	Green	Orange
--175	-266	2	Green	Green	Green	Orange	Orange
-348	138	1	Orange	Orange	Orange	Orange	Green
-197	198	1	Orange	Orange	Orange	Orange	Orange
-300	280	1	Orange	Orange	Orange	Orange	Orange
-28	193	1	Orange	Orange	Green	Orange	Orange
-330	-85	1	Orange	Orange	Green	Green	Orange
-317	286	1	Orange	Orange	Orange	Orange	Green
-327	295	1	Orange	Orange	Green	Orange	Orange
--188	64	2	Green	Green	Green	Green	Orange
-75	-188	1	Orange	Orange	Orange	Green	Green
--123	74	2	Green	Green	Orange	Green	Orange
-168	72	1	Orange	Orange	Orange	Orange	Green
-116	141	1	Orange	Orange	Orange	Green	Orange
--361	36	2	Green	Green	Green	Green	Orange
-126	25	1	Orange	Orange	Green	Green	Green
--287	-24	2	Green	Green	Orange	Green	Orange
--312	-99	2	Green	Green	Orange	Green	Green
-33	232	1	Orange	Orange	Orange	Orange	Orange
-98	169	1	Orange	Orange	Green	Orange	Green
-330	-173	1	Orange	Orange	Green	Green	Orange
-315	241	1	Orange	Orange	Green	Orange	Green
--257	-126	2	Green	Green	Green	Orange	Green
--240	169	2	Green	Green	Orange	Orange	Green
-334	139	1	Orange	Orange	Green	Green	Green
-116	-3	1	Orange	Orange	Orange	Orange	Orange
--316	187	2	Green	Green	Green	Green	Green
--397	36	2	Green	Green	Orange	Green	Orange
--220	-102	2	Green	Green	Orange	Green	Orange
-399	155	1	Orange	Orange	Orange	Green	Green
--377	-236	2	Green	Green	Green	Green	Orange
--235	-230	2	Green	Green	Green	Green	Green
-113	-188	1	Orange	Orange	Green	Orange	Orange
--388	-80	2	Green	Green	Green	Orange	Orange
--144	-265	2	Green	Green	Green	Orange	Orange
-387	-116	1	Orange	Orange	Orange	Orange	Orange
-385	-206	1	Orange	Orange	Orange	Green	Orange
-251	69	1	Orange	Orange	Orange	Green	Green
--205	65	2	Green	Green	Green	Green	Orange
-132	-53	1	Orange	Orange	Orange	Green	Orange
--201	-18	2	Green	Green	Orange	Orange	Green
-137	-287	1	Orange	Orange	Orange	Green	Orange
-253	181	1	Orange	Orange	Orange	Orange	Orange
-189	-207	1	Orange	Orange	Orange	Green	Green
--21	243	1	Orange	Orange	Orange	Orange	Orange
--6	71	1	Orange	Orange	Orange	Orange	Orange
-370	272	1	Orange	Orange	Orange	Orange	Orange
--384	208	2	Green	Orange	Green	Orange	Orange
-143	-165	1	Orange	Green	Orange	Orange	Orange
-75	63	1	Orange	Orange	Orange	Orange	Orange
-207	83	1	Orange	Orange	Orange	Green	Orange
-383	47	1	Orange	Orange	Orange	Green	Green
--115	107	2	Green	Orange	Green	Green	Green
-261	-31	1	Orange	Orange	Orange	Green	Green
-157	-283	1	Orange	Green	Orange	Green	Orange
--67	-35	2	Green	Orange	Green	Green	Green
--374	-44	2	Green	Green	Green	Orange	Green
-271	-85	1	Orange	Orange	Orange	Green	Orange
--321	-194	2	Green	Green	Green	Orange	Orange
--7	-150	2	Green	Green	Green	Green	Green
-137	39	1	Orange	Orange	Orange	Orange	Green
-261	-289	1	Orange	Orange	Orange	Orange	Orange
-314	-34	1	Orange	Orange	Orange	Green	Green
--299	123	2	Green	Green	Green	Orange	Orange
-358	204	1	Orange	Orange	Orange	Orange	Orange
-224	215	1	Orange	Orange	Orange	Green	Orange
--295	-151	2	Green	Green	Green	Orange	Green
--236	87	2	Green	Green	Green	Orange	Green
--274	-158	2	Green	Green	Green	Green	Green
--245	112	2	Green	Green	Green	Orange	Orange
--370	-129	2	Green	Green	Green	Green	Orange
-317	-65	1	Orange	Orange	Orange	Green	Orange
-203	70	1	Orange	Orange	Green	Orange	Orange
--220	111	2	Green	Green	Orange	Orange	Green
+"abs"	"ord"	"Clust2"	"Segregation"	"Seg_High"	"Seg_High_Nb"	"Seg_Medium"	"Seg_Medium_Nb"	"Seg_Low"	"Seg_Low_Nb"	"Seg_No"	"Seg_No_Nb"
+-225	258	1	Orange	Green	2	Orange	1	Green	2	Orange	1
+195	-191	2	Green	Green	2	Green	2	Orange	1	Orange	1
+-175	-266	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+348	138	2	Green	Green	2	Green	2	Green	2	Orange	1
+197	198	2	Green	Green	2	Green	2	Orange	1	Orange	1
+300	280	2	Green	Green	2	Green	2	Green	2	Orange	1
+28	193	2	Green	Green	2	Green	2	Green	2	Orange	1
+330	-85	2	Green	Green	2	Green	2	Orange	1	Orange	1
+317	286	2	Green	Green	2	Green	2	Orange	1	Green	2
+327	295	2	Green	Green	2	Green	2	Green	2	Orange	1
+-188	64	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+75	-188	2	Green	Green	2	Green	2	Orange	1	Orange	1
+-123	74	1	Orange	Orange	1	Green	2	Orange	1	Orange	1
+168	72	2	Green	Green	2	Green	2	Green	2	Orange	1
+116	141	2	Green	Green	2	Green	2	Green	2	Green	2
+-361	36	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+126	25	2	Green	Green	2	Orange	1	Green	2	Orange	1
+-287	-24	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+-312	-99	1	Orange	Orange	1	Green	2	Orange	1	Green	2
+33	232	2	Green	Orange	1	Green	2	Green	2	Orange	1
+98	169	2	Green	Green	2	Green	2	Green	2	Orange	1
+330	-173	2	Green	Green	2	Green	2	Green	2	Green	2
+315	241	2	Green	Green	2	Green	2	Green	2	Green	2
+-257	-126	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+-240	169	1	Orange	Green	2	Green	2	Orange	1	Orange	1
+334	139	2	Green	Green	2	Green	2	Green	2	Green	2
+116	-3	2	Green	Green	2	Orange	1	Orange	1	Orange	1
+-316	187	1	Orange	Orange	1	Orange	1	Green	2	Green	2
+-397	36	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+-220	-102	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+399	155	2	Green	Green	2	Green	2	Green	2	Green	2
+-377	-236	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+-235	-230	1	Orange	Orange	1	Orange	1	Green	2	Green	2
+113	-188	2	Green	Green	2	Orange	1	Green	2	Green	2
+-388	-80	1	Orange	Green	2	Orange	1	Orange	1	Green	2
+-144	-265	1	Orange	Orange	1	Green	2	Green	2	Orange	1
+387	-116	2	Green	Orange	1	Green	2	Green	2	Green	2
+385	-206	2	Green	Green	2	Orange	1	Green	2	Orange	1
+251	69	2	Green	Green	2	Green	2	Orange	1	Green	2
+-205	65	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+132	-53	2	Green	Green	2	Green	2	Green	2	Green	2
+-201	-18	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+137	-287	2	Green	Green	2	Green	2	Green	2	Orange	1
+253	181	2	Green	Green	2	Green	2	Green	2	Green	2
+189	-207	2	Green	Green	2	Green	2	Green	2	Orange	1
+-21	243	2	Green	Green	2	Green	2	Orange	1	Orange	1
+-6	71	2	Green	Green	2	Green	2	Orange	1	Green	2
+370	272	2	Green	Green	2	Green	2	Green	2	Orange	1
+-384	208	1	Orange	Orange	1	Green	2	Orange	1	Orange	1
+143	-165	2	Green	Green	2	Green	2	Green	2	Green	2
+75	63	2	Green	Green	2	Green	2	Green	2	Green	2
+207	83	2	Green	Green	2	Green	2	Orange	1	Green	2
+383	47	2	Green	Green	2	Orange	1	Green	2	Orange	1
+-115	107	1	Orange	Orange	1	Green	2	Orange	1	Orange	1
+261	-31	2	Green	Green	2	Green	2	Green	2	Green	2
+157	-283	2	Green	Green	2	Green	2	Orange	1	Green	2
+-67	-35	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+-374	-44	1	Orange	Green	2	Green	2	Orange	1	Orange	1
+271	-85	2	Green	Orange	1	Green	2	Green	2	Orange	1
+-321	-194	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+-7	-150	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+137	39	2	Green	Orange	1	Orange	1	Orange	1	Orange	1
+261	-289	2	Green	Green	2	Green	2	Green	2	Orange	1
+314	-34	2	Green	Green	2	Green	2	Green	2	Green	2
+-299	123	1	Orange	Orange	1	Green	2	Orange	1	Orange	1
+358	204	2	Green	Green	2	Green	2	Green	2	Green	2
+224	215	2	Green	Orange	1	Green	2	Orange	1	Green	2
+-295	-151	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+-236	87	1	Orange	Orange	1	Orange	1	Green	2	Orange	1
+-274	-158	1	Orange	Green	2	Orange	1	Green	2	Green	2
+-245	112	1	Orange	Orange	1	Orange	1	Green	2	Green	2
+-370	-129	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+317	-65	2	Green	Green	2	Green	2	Green	2	Orange	1
+203	70	2	Green	Green	2	Green	2	Green	2	Green	2
+-220	111	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
