@@ -42,7 +42,7 @@ set.seed(42) # set overall random seed for reproducibility
 # Open one table and build a dataframe
 # df <- read_delim("Stimuli/Social_Class_Tables/table5.txt", delim = "\t", escape_double = FALSE, 
 #     trim_ws = TRUE)
-df <- read_table("Stimuli/Social_Class_Tables/table5.txt")
+df <- read_table("Stimuli/Social_Class_Tables/table1.txt")
 
 
 dataCA <- df # Rename this dataframe for running the cluster analysis
@@ -175,7 +175,7 @@ for (i in Filelist) {
                                          Segregation == "Green" & runif(n()) < 0.50 ~ "Orange",
                                          TRUE ~ Segregation))
   
-  write.table(df, file = paste("Stimuli/Intergroup_Tables/", i, sep = ""), sep = "\t",row.names = FALSE)
+  write.table(df, file = paste("Stimuli/Intergroup_Tables/", i, sep = ""), sep = "\t",row.names = FALSE, quote = FALSE)
   
   List[[length(List)+1]] = i
   
