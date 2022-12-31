@@ -1,0 +1,188 @@
+---
+title: "Building_Intergroup_Tables"
+author: "Lucas Gautier, Victor Auger, Rhéa Haddad"
+date: '2022-12-27'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+# Set Up environments
+
+cat("\014") # clear console
+rm(list=ls()) # clear workspace
+
+# Load packages
+
+# 4 lines : Installs (if necessary) and loads the packages you enter in the 1st row
+# 1st row : Creates a list of packages names that you want to use in the script (there is virtually no limit in how much package you can put here)
+# 2nd row : Creates a list of packages that have not been installed yet (new packages)
+# 3rd row : Installs the new packages
+# 4th row : Loads all the listed packages
+list.of.packages <- c("dplyr", "tidyverse", "readr", "psych", "NbClust", "MASS")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+invisible(lapply(list.of.packages, require, character.only = TRUE))
+
+rm(list=ls()) # clear workspace
+
+set.seed(42) # set overall random seed for reproducibility
+
+
+```
+
+# Opening one file
+
+
+```{r}
+# Open one table and build a dataframe
+# df <- read_delim("Stimuli/Social_Class_Tables/table5.txt", delim = "\t", escape_double = FALSE, 
+#     trim_ws = TRUE)
+df <- read_table("Stimuli/Social_Class_Tables/table5.txt")
+
+
+dataCA <- df # Rename this dataframe for running the cluster analysis
+
+###############################
+
+# Cluster analysis (K-Means methode)
+fit2 <- kmeans(dataCA, 2) # Build a cluster partitioning of the dataframe (based on X and Y variables) with 2 categories (= 2 clusters)
+df$Clust2 <- fit2$cluster # Add the clustering number for each row ao the dataframe
+str(df) # Give the structure of the dataframe
+
+# Extraction des moyennes de chaque cluster sur les variables d'interet
+clus2 <- aggregate(dataCA,by=list(fit2$cluster),FUN=mean) # Calculate the centromere (= the mean position) of each cluster 
+clus2 <- round(clus2, 2) # round the result to two decimals
+clus2 # print x-position and y-position of the centromere of these two clusters
+
+addmargins(table(df$Clust2)) # Give the number of points in each cluster 
+round(addmargins(prop.table(table(df$Clust2))),2) # Give the proportion of points in each cluster
+
+
+# Build a new variable renaming Cluster "1" and "2" to cluster "Orange" and "Green"
+df <- df %>% mutate(Segregation = case_when(Clust2 == "1" ~ "Orange",
+                                             Clust2 == "2" ~ "Green"))
+
+
+df <- df %>% mutate(Seg_High = case_when(Segregation == "Orange" & runif(n()) < 0.10 ~ "Green",
+                                             Segregation == "Green" & runif(n()) < 0.10 ~ "Orange",
+                                             TRUE ~ Segregation))
+
+
+df <- df %>% mutate(Seg_Medium = case_when(Segregation == "Orange" & runif(n()) < 0.20 ~ "Green",
+                                             Segregation == "Green" & runif(n()) < 0.20 ~ "Orange",
+                                             TRUE ~ Segregation))
+
+
+
+df <- df %>% mutate(Seg_Low = case_when(Segregation == "Orange" & runif(n()) < 0.35 ~ "Green",
+                                             Segregation == "Green" & runif(n()) < 0.35 ~ "Orange",
+                                             TRUE ~ Segregation))
+
+
+
+df <- df %>% mutate(Seg_No = case_when(Segregation == "Orange" & runif(n()) < 0.50 ~ "Green",
+                                             Segregation == "Green" & runif(n()) < 0.50 ~ "Orange",
+                                             TRUE ~ Segregation))
+
+
+# Voir graphiquement la répartition de chaque personne dans les cluster
+df$Clust2<- as.character(df$Clust2)
+Sp <- ggplot(df, aes(x=abs, y=ord, shape=Clust2, color=Clust2)) +
+  geom_point()
+
+Seg <- ggplot(df, aes(x=abs, y=ord, shape=Clust2, color=Segregation)) +
+  geom_point()
+
+SegHigh <- ggplot(df, aes(x=abs, y=ord, shape=Clust2, color=Seg_High)) +
+  geom_point()
+
+SegMedium <- ggplot(df, aes(x=abs, y=ord, shape=Clust2, color=Seg_Medium)) +
+  geom_point()
+
+SegLow <- ggplot(df, aes(x=abs, y=ord, shape=Clust2, color=Seg_Low)) +
+  geom_point()
+
+SegNo <- ggplot(df, aes(x=abs, y=ord, shape=Clust2, color=Seg_No)) +
+  geom_point()
+
+# write.table(df, file = "Stimuli/Intergroup_Tables/table52.txt", sep = "\t",row.names = FALSE) #Use tabula column separator
+
+```
+
+# Opening all the files
+
+```{r}
+
+# Create a file containing each file name present in the folder
+Filelist <- list.files(path = "Stimuli/Social_Class_Tables/") 
+# Give the number of file in the folder (it's also the number of participants)
+Nb_File<- length(Filelist)
+
+List = list() # Create an empty list
+
+for (i in Filelist) {
+  # Open one table and build a dataframe
+  # df <- read_delim(paste("Stimuli/Social_Class_Tables/",i, sep = ""), delim = "\t", escape_double = FALSE, 
+  #                  trim_ws = TRUE)
+  df <- read_table(paste("Stimuli/Social_Class_Tables/",i, sep = ""))
+  
+  dataCA <- df # Rename this dataframe for running the cluster analysis
+  
+  ###############################
+  
+  # Cluster analysis (K-Means methode)
+  fit2 <- kmeans(dataCA, 2) # Build a cluster partitioning of the dataframe (based on X and Y variables) with 2 categories (= 2 clusters)
+  df$Clust2 <- fit2$cluster # Add the clustering number for each row ao the dataframe
+  str(df) # Give the structure of the dataframe
+  
+  # Extraction des moyennes de chaque cluster sur les variables d'interet
+  clus2 <- aggregate(dataCA,by=list(fit2$cluster),FUN=mean) # Calculate the centromere (= the mean position) of each cluster 
+  clus2 <- round(clus2, 2) # round the result to two decimals
+  clus2 # print x-position and y-position of the centromere of these two clusters
+  
+  addmargins(table(df$Clust2)) # Give the number of points in each cluster 
+  round(addmargins(prop.table(table(df$Clust2))),2) # Give the proportion of points in each cluster
+  
+  
+  # Build a new variable renaming Cluster "1" and "2" to cluster "Orange" and "Green"
+  df <- df %>% mutate(Segregation = case_when(Clust2 == "1" ~ "Orange",
+                                              Clust2 == "2" ~ "Green"))
+  
+  
+  df <- df %>% mutate(Seg_High = case_when(Segregation == "Orange" & runif(n()) < 0.10 ~ "Green",
+                                           Segregation == "Green" & runif(n()) < 0.10 ~ "Orange",
+                                           TRUE ~ Segregation))
+  
+  
+  df <- df %>% mutate(Seg_Medium = case_when(Segregation == "Orange" & runif(n()) < 0.20 ~ "Green",
+                                             Segregation == "Green" & runif(n()) < 0.20 ~ "Orange",
+                                             TRUE ~ Segregation))
+  
+  
+  
+  df <- df %>% mutate(Seg_Low = case_when(Segregation == "Orange" & runif(n()) < 0.35 ~ "Green",
+                                          Segregation == "Green" & runif(n()) < 0.35 ~ "Orange",
+                                          TRUE ~ Segregation))
+  
+  
+  
+  df <- df %>% mutate(Seg_No = case_when(Segregation == "Orange" & runif(n()) < 0.50 ~ "Green",
+                                         Segregation == "Green" & runif(n()) < 0.50 ~ "Orange",
+                                         TRUE ~ Segregation))
+  
+  write.table(df, file = paste("Stimuli/Intergroup_Tables/", i, sep = ""), sep = "\t",row.names = FALSE)
+  
+  List[[length(List)+1]] = i
+  
+  rm(list=setdiff(ls(), c("Filelist", "Nb_File", "List"))) # clear workspace except the data frame
+}
+  
+  
+```
+
+
