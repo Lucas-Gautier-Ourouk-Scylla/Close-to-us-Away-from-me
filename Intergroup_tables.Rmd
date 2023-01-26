@@ -42,8 +42,10 @@ set.seed(42) # set overall random seed for reproducibility
 # Open one table and build a dataframe
 # df <- read_delim("Stimuli/Social_Class_Tables/table5.txt", delim = "\t", escape_double = FALSE, 
 #     trim_ws = TRUE)
-df <- read_table("Stimuli/Social_Class_Tables/table5.txt")
+df <- read_table("Stimuli/Social_Class_Tables/table1.txt")
 
+  names(df)[1] <- "abs"
+  names(df)[2] <- "ord"
 
 dataCA <- df # Rename this dataframe for running the cluster analysis
 
@@ -110,9 +112,13 @@ SegLow <- ggplot(df, aes(x=abs, y=ord, shape=Clust2, color=Seg_Low)) +
 SegNo <- ggplot(df, aes(x=abs, y=ord, shape=Clust2, color=Seg_No)) +
   geom_point()
 
-# write.table(df, file = "Stimuli/Intergroup_Tables/table52.txt", sep = "\t",row.names = FALSE) #Use tabula column separator
+# write.table(df, file = "Stimuli/Intergroup_Tables/table52.txt", sep = "\t",row.names = FALSE, quote = FALSE, col.names = paste0("\"", names(df), "\"")) #Use tabula column separator
 
 ```
+
+
+
+
 
 # Opening all the files
 
@@ -130,6 +136,9 @@ for (i in Filelist) {
   # df <- read_delim(paste("Stimuli/Social_Class_Tables/",i, sep = ""), delim = "\t", escape_double = FALSE, 
   #                  trim_ws = TRUE)
   df <- read_table(paste("Stimuli/Social_Class_Tables/",i, sep = ""))
+  
+  names(df)[1] <- "abs"
+  names(df)[2] <- "ord"
   
   dataCA <- df # Rename this dataframe for running the cluster analysis
   
@@ -158,24 +167,36 @@ for (i in Filelist) {
                                            Segregation == "Green" & runif(n()) < 0.10 ~ "Orange",
                                            TRUE ~ Segregation))
   
+  df <- df %>% mutate(Seg_High_Nb = case_when(Seg_High == "Orange" ~ 1,
+                                              Seg_High == "Green" ~ 2))
+  
   
   df <- df %>% mutate(Seg_Medium = case_when(Segregation == "Orange" & runif(n()) < 0.20 ~ "Green",
                                              Segregation == "Green" & runif(n()) < 0.20 ~ "Orange",
                                              TRUE ~ Segregation))
   
+  df <- df %>% mutate(Seg_Medium_Nb = case_when(Seg_Medium == "Orange" ~ 1,
+                                                Seg_Medium == "Green" ~ 2))
   
   
   df <- df %>% mutate(Seg_Low = case_when(Segregation == "Orange" & runif(n()) < 0.35 ~ "Green",
                                           Segregation == "Green" & runif(n()) < 0.35 ~ "Orange",
                                           TRUE ~ Segregation))
   
+  df <- df %>% mutate(Seg_Low_Nb = case_when(Seg_Low == "Orange" ~ 1,
+                                             Seg_Low == "Green" ~ 2))
   
   
   df <- df %>% mutate(Seg_No = case_when(Segregation == "Orange" & runif(n()) < 0.50 ~ "Green",
                                          Segregation == "Green" & runif(n()) < 0.50 ~ "Orange",
                                          TRUE ~ Segregation))
   
-  write.table(df, file = paste("Stimuli/Intergroup_Tables/", i, sep = ""), sep = "\t",row.names = FALSE)
+  df <- df %>% mutate(Seg_No_Nb = case_when(Seg_No == "Orange" ~ 1,
+                                            Seg_No == "Green" ~ 2))
+  
+  
+  
+  write.table(df, file = paste("Stimuli/Intergroup_Tables/", i, sep = ""), sep = "\t",row.names = FALSE, quote = FALSE, col.names = paste0("\"", names(df), "\""))
   
   List[[length(List)+1]] = i
   

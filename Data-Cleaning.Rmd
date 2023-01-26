@@ -5,6 +5,9 @@ date: '2022-11-24'
 output: html_document
 ---
 
+This script is the data cleaning of the project "Close-to-Us-Away-From-Me".
+The Aim of this project is to study the influence of social class and self-models (independence/interdependence) on proxemic preferences
+
 
 ```{r}
 
@@ -20,7 +23,7 @@ rm(list=ls()) # clear workspace
 # 2nd row : Creates a list of packages that have not been installed yet (new packages)
 # 3rd row : Installs the new packages
 # 4th row : Loads all the listed packages
-list.of.packages <- c("dplyr", "emmeans", "tidyverse", "readr", "psych", "lmerTest")
+list.of.packages <- c("dplyr", "emmeans", "tidyverse", "readr", "psych", "lmerTest", 'explore')
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 invisible(lapply(list.of.packages, require, character.only = TRUE))
@@ -74,6 +77,17 @@ Difference versus Similarity
 - Similarity5: Being different from others makes me uncomfortable
 - Similarity6: I avoid standing out among my friends.
 - Similarity7: I feel good when I cooperate with others. 
+
+PESS: 
+
+- PESS1: My income is low compared to others
+- PESS2: I feel that I have less money than I need
+- PESS3: I find it difficult to pay my bills and basic needs
+- PESS4: My income is insufficient to live decently 
+- PESS5: I do not have enough money to cover all my monthly expenses
+- PESS6: My limited income and savings make me uncertain about my future
+- PESS7: I can't stop thinking about the lack of money
+- PESS8: I worry about not having enough money
 
 
 ```{r}
@@ -148,7 +162,7 @@ names(tmp)[51] <- "PESS8"
 names(tmp)[52] <- "Logement_Type"
 names(tmp)[53] <- "Logement_Type_Other" 
 names(tmp)[54] <- "Logement_Size" 
-names(tmp)[5] <- "Room_Nb" 
+names(tmp)[55] <- "Room_Nb" 
 names(tmp)[56] <- "Household_Nb" 
 names(tmp)[57] <- "Minors_Nb" 
 names(tmp)[58] <- "Share_Commons" 

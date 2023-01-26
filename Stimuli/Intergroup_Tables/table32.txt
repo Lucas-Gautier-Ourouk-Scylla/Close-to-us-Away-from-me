@@ -1,76 +1,76 @@
-"\"abs\""	"\"ord\""	"Clust2"	"Segregation"	"Seg_High"	"Seg_Medium"	"Seg_Low"	"Seg_No"
-76	4	2	"Green"	"Green"	"Green"	"Green"	"Orange"
-38	57	2	"Green"	"Green"	"Green"	"Orange"	"Orange"
-271	185	2	"Green"	"Green"	"Green"	"Green"	"Green"
-109	137	2	"Green"	"Green"	"Orange"	"Orange"	"Orange"
-331	-209	2	"Green"	"Green"	"Green"	"Orange"	"Green"
--7	274	1	"Orange"	"Orange"	"Green"	"Orange"	"Orange"
-261	152	2	"Green"	"Green"	"Green"	"Green"	"Green"
-176	211	2	"Green"	"Green"	"Green"	"Orange"	"Orange"
-388	104	2	"Green"	"Green"	"Green"	"Orange"	"Orange"
-272	-68	2	"Green"	"Green"	"Green"	"Orange"	"Orange"
-322	95	2	"Green"	"Green"	"Green"	"Orange"	"Orange"
--161	-107	1	"Orange"	"Green"	"Orange"	"Green"	"Orange"
--138	67	1	"Orange"	"Orange"	"Orange"	"Green"	"Orange"
-307	164	2	"Green"	"Green"	"Green"	"Orange"	"Orange"
-328	-140	2	"Green"	"Green"	"Green"	"Green"	"Orange"
-32	149	2	"Green"	"Green"	"Orange"	"Green"	"Green"
-161	180	2	"Green"	"Green"	"Green"	"Green"	"Orange"
--358	-48	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
-300	73	2	"Green"	"Green"	"Green"	"Green"	"Orange"
--287	245	1	"Orange"	"Orange"	"Green"	"Green"	"Green"
--216	110	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
--47	235	1	"Orange"	"Orange"	"Orange"	"Orange"	"Green"
--245	-24	1	"Orange"	"Green"	"Green"	"Orange"	"Orange"
-226	-217	2	"Green"	"Green"	"Orange"	"Green"	"Green"
-396	48	2	"Green"	"Orange"	"Green"	"Green"	"Orange"
--65	289	1	"Orange"	"Orange"	"Orange"	"Green"	"Orange"
-94	-22	2	"Green"	"Green"	"Green"	"Green"	"Green"
--209	10	1	"Orange"	"Orange"	"Orange"	"Orange"	"Green"
--170	24	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
-79	67	2	"Green"	"Green"	"Green"	"Orange"	"Green"
--307	-63	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
--134	195	1	"Orange"	"Orange"	"Green"	"Green"	"Green"
--86	247	1	"Orange"	"Orange"	"Orange"	"Orange"	"Green"
-216	197	2	"Green"	"Green"	"Green"	"Green"	"Orange"
-74	-35	2	"Green"	"Green"	"Green"	"Green"	"Green"
-100	161	2	"Green"	"Green"	"Green"	"Green"	"Green"
-139	12	2	"Green"	"Green"	"Green"	"Orange"	"Orange"
--256	-211	1	"Orange"	"Orange"	"Orange"	"Green"	"Orange"
--257	179	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
-179	292	2	"Green"	"Green"	"Green"	"Green"	"Orange"
--236	-69	1	"Orange"	"Orange"	"Green"	"Orange"	"Green"
--6	156	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
--133	-217	1	"Orange"	"Orange"	"Green"	"Orange"	"Orange"
--231	21	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
--345	196	1	"Orange"	"Orange"	"Orange"	"Orange"	"Green"
-305	-167	2	"Green"	"Green"	"Green"	"Green"	"Green"
-104	85	2	"Green"	"Green"	"Green"	"Green"	"Orange"
--396	278	1	"Orange"	"Green"	"Orange"	"Orange"	"Green"
--109	162	1	"Orange"	"Orange"	"Orange"	"Green"	"Green"
--108	-262	1	"Orange"	"Green"	"Orange"	"Green"	"Green"
--395	187	1	"Orange"	"Orange"	"Orange"	"Green"	"Orange"
-233	271	2	"Green"	"Green"	"Green"	"Green"	"Orange"
-58	121	2	"Green"	"Green"	"Green"	"Green"	"Green"
--69	-91	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
-215	-288	2	"Green"	"Green"	"Green"	"Green"	"Orange"
-104	-299	2	"Green"	"Green"	"Green"	"Orange"	"Green"
-234	202	2	"Green"	"Green"	"Green"	"Green"	"Green"
-26	221	2	"Green"	"Green"	"Green"	"Orange"	"Green"
-157	109	2	"Green"	"Green"	"Green"	"Green"	"Orange"
-285	274	2	"Green"	"Green"	"Green"	"Green"	"Orange"
--105	176	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
--186	-220	1	"Orange"	"Orange"	"Orange"	"Green"	"Green"
--315	133	1	"Orange"	"Orange"	"Orange"	"Orange"	"Green"
--311	-184	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
-325	-175	2	"Green"	"Green"	"Orange"	"Orange"	"Orange"
--116	298	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
--155	208	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
-230	-233	2	"Green"	"Green"	"Orange"	"Green"	"Green"
--395	264	1	"Orange"	"Orange"	"Orange"	"Orange"	"Green"
-312	-54	2	"Green"	"Green"	"Green"	"Green"	"Green"
-368	202	2	"Green"	"Green"	"Green"	"Green"	"Orange"
--304	-148	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
--356	-28	1	"Orange"	"Orange"	"Orange"	"Orange"	"Orange"
-351	-283	2	"Green"	"Green"	"Green"	"Orange"	"Green"
-129	-232	2	"Green"	"Green"	"Green"	"Orange"	"Orange"
+"abs"	"ord"	"Clust2"	"Segregation"	"Seg_High"	"Seg_High_Nb"	"Seg_Medium"	"Seg_Medium_Nb"	"Seg_Low"	"Seg_Low_Nb"	"Seg_No"	"Seg_No_Nb"
+76	4	1	Orange	Orange	1	Green	2	Green	2	Orange	1
+38	57	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+271	185	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+109	137	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+331	-209	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+-7	274	2	Green	Green	2	Green	2	Green	2	Orange	1
+261	152	1	Orange	Orange	1	Green	2	Orange	1	Green	2
+176	211	1	Orange	Orange	1	Orange	1	Green	2	Orange	1
+388	104	1	Orange	Orange	1	Green	2	Orange	1	Orange	1
+272	-68	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+322	95	1	Orange	Orange	1	Green	2	Orange	1	Orange	1
+-161	-107	2	Green	Green	2	Orange	1	Green	2	Orange	1
+-138	67	2	Green	Green	2	Green	2	Orange	1	Orange	1
+307	164	1	Orange	Orange	1	Orange	1	Green	2	Green	2
+328	-140	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+32	149	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+161	180	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+-358	-48	2	Green	Green	2	Green	2	Green	2	Orange	1
+300	73	1	Orange	Orange	1	Green	2	Orange	1	Green	2
+-287	245	2	Green	Orange	1	Orange	1	Green	2	Orange	1
+-216	110	2	Green	Green	2	Green	2	Green	2	Orange	1
+-47	235	2	Green	Green	2	Orange	1	Orange	1	Green	2
+-245	-24	2	Green	Green	2	Green	2	Orange	1	Orange	1
+226	-217	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+396	48	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+-65	289	2	Green	Green	2	Green	2	Orange	1	Orange	1
+94	-22	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+-209	10	2	Green	Green	2	Green	2	Green	2	Green	2
+-170	24	2	Green	Green	2	Orange	1	Orange	1	Green	2
+79	67	1	Orange	Orange	1	Orange	1	Green	2	Orange	1
+-307	-63	2	Green	Green	2	Green	2	Green	2	Orange	1
+-134	195	2	Green	Green	2	Green	2	Green	2	Orange	1
+-86	247	2	Green	Green	2	Green	2	Green	2	Orange	1
+216	197	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+74	-35	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+100	161	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+139	12	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+-256	-211	2	Green	Green	2	Green	2	Green	2	Orange	1
+-257	179	2	Green	Green	2	Green	2	Green	2	Green	2
+179	292	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+-236	-69	2	Green	Green	2	Orange	1	Green	2	Orange	1
+-6	156	2	Green	Green	2	Orange	1	Green	2	Orange	1
+-133	-217	2	Green	Green	2	Green	2	Orange	1	Orange	1
+-231	21	2	Green	Orange	1	Green	2	Green	2	Green	2
+-345	196	2	Green	Green	2	Green	2	Orange	1	Green	2
+305	-167	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+104	85	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+-396	278	2	Green	Green	2	Orange	1	Orange	1	Orange	1
+-109	162	2	Green	Green	2	Green	2	Green	2	Orange	1
+-108	-262	2	Green	Green	2	Green	2	Green	2	Green	2
+-395	187	2	Green	Green	2	Green	2	Green	2	Orange	1
+233	271	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+58	121	1	Orange	Green	2	Orange	1	Orange	1	Green	2
+-69	-91	2	Green	Green	2	Green	2	Green	2	Green	2
+215	-288	1	Orange	Orange	1	Orange	1	Green	2	Green	2
+104	-299	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+234	202	1	Orange	Orange	1	Orange	1	Orange	1	Orange	1
+26	221	1	Orange	Orange	1	Green	2	Orange	1	Orange	1
+157	109	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+285	274	1	Orange	Orange	1	Green	2	Green	2	Green	2
+-105	176	2	Green	Green	2	Orange	1	Green	2	Green	2
+-186	-220	2	Green	Green	2	Green	2	Orange	1	Green	2
+-315	133	2	Green	Green	2	Green	2	Orange	1	Green	2
+-311	-184	2	Green	Green	2	Green	2	Orange	1	Green	2
+325	-175	1	Orange	Green	2	Orange	1	Orange	1	Green	2
+-116	298	2	Green	Green	2	Green	2	Green	2	Orange	1
+-155	208	2	Green	Green	2	Green	2	Green	2	Green	2
+230	-233	1	Orange	Green	2	Orange	1	Green	2	Green	2
+-395	264	2	Green	Orange	1	Green	2	Orange	1	Green	2
+312	-54	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+368	202	1	Orange	Orange	1	Green	2	Orange	1	Green	2
+-304	-148	2	Green	Green	2	Orange	1	Green	2	Green	2
+-356	-28	2	Green	Orange	1	Green	2	Green	2	Green	2
+351	-283	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
+129	-232	1	Orange	Orange	1	Orange	1	Orange	1	Green	2
