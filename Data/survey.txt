@@ -1,0 +1,221 @@
+scale: Accord
+- {score=1} 1
+- {score=2} 2
+- {score=3} 3
+- {score=4} 4
+- {score=5} 5
+- {score=6} 6
+- {score=7} 7
+
+scale: MacArthur
+- {score=1} 1
+- {score=2} 2
+- {score=3} 3
+- {score=4} 4
+- {score=5} 5
+- {score=6} 6
+- {score=7} 7
+- {score=8} 8
+- {score=9} 9
+- {score=10} 10
+
+scale: Binomial
+- {Score=0} Non
+- {Score=1} Oui
+
+
+
+l: Experiment_Beginning
+t: info
+q: Cliquez sur le bouton ci-dessous pour démarrer la première partie de l'expérience. 
+
+
+l: DistanceSpatiale
+t: experiment
+- CrowdSpace
+
+l: Experiment_End
+t: info
+q: Cette tâche est terminée. Vous allez maintenant répondre à quelques questions avant de conclure cette expérience. 
+
+
+random: begin
+
+l: Financial_Pb
+q: Indiquez sur une échelle de 1 à 7 votre degré d'accord avec les affirmations suivantes. 1=Pas du tout d'accord ; 7=Extrêmement d'accord <br>
+Actuellement je considère que je suis (financièrement) capable de...
+t: scale Accord
+o: random
+- Chauffer adéquatement mon logement
+- Partir une semaine en vacances 
+- Acheter des vêtements
+- Manger de la viande ou du poisson tous les jours (si c'est en accord avec mes habitudes alimentaire)
+- Inviter ma famille ou des ami.e.s à manger ou boire un verre chez moi
+- Avoir au moins deux paires de chaussures personnelles
+- Remplacer mes meubles usés
+- Rénover mon logement
+- Avoir une assurance sur les affaires contenues dans mon logement
+- Garder une décoration décente dans mon logement
+
+
+l: Subjective_SES
+q: L'échelle suivante représente la position des gens dans la société. En haut de l’échelle se trouvent les personnes les mieux loties, celles qui ont le plus d’argent, le plus d’éducation et les meilleurs emplois, en bas de l’échelle se trouvent les personnes les plus mal loties, celles qui ont le moins d’argent, le moins d’éducation, les pires emplois ou pas d’emploi. Veuillez cocher la case qui représente le mieux votre position.
+t: radio
+i: {center} ladderSmall.png
+- {score=10} 10
+- {score=9} 9
+- {score=8} 8
+- {score=7} 7
+- {score=6} 6
+- {score=5} 5
+- {score=4} 4
+- {score=3} 3
+- {score=2} 2
+- {score=1} 1
+
+
+
+l: Interdependance
+q: Indiquez sur une échelle de 1 à 7 votre degré d'accord avec les affirmations suivantes. Répondez le plus sincèrement possible.<br>
+1=Pas du tout d'accord ; 7=Extrêmement d'accord <br>
+t: scale Accord
+o: random
+- Je préfère être auto-suffisant plutôt que de dépendre des autres.
+- J'essaie de ne pas dépendre des autres.
+- Je préfère me tourner vers d'autres personnes pour obtenir de l'aide plutôt que de ne compter que sur moi-même.
+- Il est important pour moi d'agir en tant que personne indépendante.
+- Je suis embarrassé.e quand je dois compter sur moi-même.
+- Je suis semblable aux personnes qui me sont proches.
+- J'ai le sentiment que mon destin est lié à celui des personnes qui m'entourent.
+- Il est important de consulter des ami.e.s proches et d'obtenir leurs avis avant de prendre une décision.
+- J'aime partager des petites choses avec mes voisin.e.s.
+- Je considère que mon bonheur est distinct de celui de mes ami.e.s et de ma famille.
+- Il est important pour moi d'être un membre accepté de ma famille et de mon groupe d'ami.e.s.
+- Je ressens généralement un fort sentiment de fierté lorsqu'un membre de ma famille accomplit quelque chose d’important.
+- Souvent, lorsque je pense à moi, je pense également à mes ami.e.s proches et à ma famille.
+- Si une personne blesse un.e de mes proches, je me sens aussi personnellement blessé.e.
+- Mes relations proches n’ont pas d’influence sur ce que je ressens à mon égard.
+- Mes accomplissements personnels sont plus importants que le maintien de mes relations sociales.
+- Je considère que mes relations proches sont distinctes de ce que je suis en tant qu'individu.
+- Je ressens généralement un fort sentiment de fierté lorsqu'un.e de mes proches accomplit quelque chose d’important.
+- Si une personne insulte un membre de ma famille ou de mes ami.e.s, je me sens moi-même personnellement insulté.e.
+- Je soutiens toujours une décision de groupe, même si je sais qu'elle est mauvaise.
+- Mon rôle au sein de ma famille me donne une idée de qui je suis.
+- Je préfère faire ce que je veux sans me laisser influencer par ma famille ou mes ami.e.s.
+- Mon bonheur dépend beaucoup du bonheur de ceux.celles qui m'entourent.
+- Je suis un individu unique.
+- Être un individu unique est important pour moi.
+- Je suis une personne unique, distincte des autres. 
+- J'aime être unique et différent.e des autres à bien des égards.
+- Être différent.e des autres me met mal à l'aise. 
+- J'évite de me distinguer de mes amis.e.s. 
+- Je me sens bien quand je coopère avec les autres. 
+
+l: PESS
+q: Vous trouverez ci-dessous une liste d’affirmations concernant l’expérience et l’évaluation que vous pouvez faire de votre situation financière personnelle. Merci d’indiquer dans quelle mesure chaque affirmation est vraie pour vous. Indiquez sur une échelle de 1 à 7 votre degré d'accord avec les affirmations.<br>
+1=Pas du tout d'accord ; 7=Extrêmement d'accord <br>
+t: scale Accord
+o: random
+- Mes revenus sont maigres en comparaison aux autres
+- J’ai le sentiment que j’ai moins d’argent que ce dont j’ai besoin
+- J'ai des difficultés à payer mes factures et des produits de base
+- Mes revenus sont insuffisants pour vivre convenablement 
+- Je n’ai pas assez d’argent pour couvrir l’ensemble de mes dépenses mensuelles
+- Mes revenus et économies limitées me rendent incertain·e quant à mon futur
+- Je ne peux pas m’empêcher de penser au manque d’argent
+- Je m’inquiète de ne pas avoir suffisamment d’argent
+
+
+random: end
+
+l: Logement_Type
+t: radio
+q: Actuellement, dans quel type de logement habitez-vous ?
+- Je suis sans domicile fixe
+- Studio, chambre universitaire ou appartement dans un immeuble de moins de 10 appartements
+- Studio, chambre universitaire ou appartement dans un immeuble de plus de 10 appartements
+- Maison
+- {other} Autre
+
+
+l: Logement_Size
+t: radio
+q: Quelle est la taille approximative de votre logement ?
+- Je suis sans domicile
+- Moins que 10m²
+- Entre 10 et 20m² 
+- Entre 20 et 50m²
+- Entre 50 et 100m²
+- Entre 100 et 200m²
+- Plus de 200m²
+
+
+l: Logement
+t: range
+q: Déplacez le curseur pour répondre aux questions suivantes
+- {min=0,max=50, start=1} Combien de pièces composent votre logement (toilettes, salles de bain, cellier,... non comprises) ?
+- {min=1,max=20, left=Je suis seul.e, right=20 ou plus de personnes, start=1} Combien de personnes composent votre logement, vous compris.e ?
+- {min=0,max=20, left=Aucun.e, right=20 ou plus, start=1} Combien de mineur.e.s composent votre logement ?
+
+
+
+
+l: Logement_Material
+t: radio
+q: Dans votre logement, partagez-vous des pièces avec des personnes extérieures ?
+- Oui
+- Non
+
+
+l: Town_Country
+t: textline
+q: Indiquez les noms de la ville et du pays où vous habitez.
+- Ville    
+-  <br>Pays  
+
+
+l: Etudes
+t: radio
+q: Quel est le plus haut niveau d'études que vous ayez atteint ?
+- Sans diplôme
+- Brevet des collèges/ BEPS
+- CAP ou BEP
+- Baccalauréat
+- BAC+1
+- BAC+2
+- BAC+3 
+- BAC+4
+- BAC+5
+- BAC+6
+- BAC+8
+- + que BAC+8
+
+l: CSP
+t: radio
+q: A quelle catégorie socio-professionnelle appartenez-vous ?
+- Agriculteur.rice, exploitant.e
+- Artisan.ne, commerçant.e, chef.fe d'entreprise
+- Cadre et profession intellectuelle supérieure
+- Profession intermédiaire (e.g., enseignant.e, infirmier.e, assistant.e social.e, etc.)
+- Employé.e
+- Ouvrier.e
+- Retraité.e
+- Etudiant.e ou en formation
+- Sans activité professionnelle ou militaire
+- Ne sais pas ou ne peux pas répondre
+- {other} Autre
+
+l: Age
+t: range
+q: Veuillez indiquer votre âge :<br>
+(déplacez le curseur de droite à gauche pour répondre)
+- {min=6,max=120, start=18}
+
+l: Gender
+t: radio
+q: Quel est votre genre ?
+- Femme
+- Homme
+- Je ne me définis dans aucune des catégories précédentes
+- Je préfère ne pas répondre
+
