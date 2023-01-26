@@ -201,6 +201,9 @@ rm(list=setdiff(ls(), c("df"))) # clear workspace except the data frame
 
 
 ```{r}
+describe(df$PESS_Mean)
+
+explore(df)
 
 ```
 
