@@ -1,0 +1,55 @@
+---
+title: "sim_power"
+author: "Victor Auger"
+date: "02/02/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(faux)
+library(ggplot2)
+library(lmerTest)
+library(dplyr)
+```
+
+
+```{r}
+list_pvalue <- list()
+
+for (i in c(1:500)) {
+  dat <- sim_design(within = list(vars = c("prefproxemique", "SocialClass")),
+                mu = list(prefproxemique = 0, SocialClass = 0),
+                sd = list(prefproxemique = 1, SocialClass = 1),
+                r = 0.2, plot = FALSE, n = 400
+                )
+
+
+  for (c in c(1:120)) {
+    dat_2 <- dat
+    dat_2 <- dat_2 %>% mutate(prefproxemique = rnorm_pre(prefproxemique, r = 0.5))
+    dat_3 <- rbind(dat, dat_2)
+  }
+  
+test <- cor.test(dat$prefproxemique, dat$SocialClass)
+p_value <- test$p.value
+
+list_pvalue <- append(list_pvalue, p_value)
+
+lmer(dat, )
+
+}
+
+p_underalpha <- sum(list_pvalue < 0.05)
+
+print(paste0("La puissance est de ", p_underalpha/length(list_pvalue) * 100,"%"))
+```
+
+
+```{r}
+ggplot(dat, aes(SocialClass, prefproxemique)) + geom_point() + geom_smooth()
+```
+
