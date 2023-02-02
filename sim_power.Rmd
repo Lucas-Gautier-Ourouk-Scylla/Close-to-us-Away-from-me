@@ -14,38 +14,61 @@ library(faux)
 library(ggplot2)
 library(lmerTest)
 library(dplyr)
+library(tidyverse)
 ```
 
 
 ```{r}
 list_pvalue <- list()
 
+list_p_cor <- list()
+
 for (i in c(1:500)) {
   dat <- sim_design(within = list(vars = c("prefproxemique", "SocialClass")),
                 mu = list(prefproxemique = 0, SocialClass = 0),
                 sd = list(prefproxemique = 1, SocialClass = 1),
-                r = 0.2, plot = FALSE, n = 400
+                r = 0.15, plot = FALSE, n = 300
                 )
-
-
-  for (c in c(1:120)) {
-    dat_2 <- dat
-    dat_2 <- dat_2 %>% mutate(prefproxemique = rnorm_pre(prefproxemique, r = 0.5))
-    dat_3 <- rbind(dat, dat_2)
-  }
+  dat$trial <- 1
   
-test <- cor.test(dat$prefproxemique, dat$SocialClass)
-p_value <- test$p.value
+   dat_Final <- dat
+  for (c in c(2:120)) {
+    dat_2 <- dat %>% mutate(prefproxemique = rnorm_pre(prefproxemique, r = 0.5),
+                            trial = c)
+    dat_Final <- rbind(dat_Final, dat_2)
+  }
+   
+   
+#wide <- spread(dat_Final, key = trial, value = prefproxemique)
 
-list_pvalue <- append(list_pvalue, p_value)
+#wide <- wide %>%  mutate(mean_trial = rowMeans(select(wide, c(3:62))))
+  
 
-lmer(dat, )
+
+#test <- cor.test(wide$mean_trial, wide$SocialClass, na.rm = TRUE)
+#p_value_cor <- test$p.value
+
+#list_p_cor <- append(list_p_cor, p_value_cor)
+
+
+
+
+lm <- lmerTest::lmer(data = dat_Final, prefproxemique ~ SocialClass + (1|id))
+lm_sum <- summary(lm)
+
+p_valeur <- lm_sum$coefficients[2,5]
+list_pvalue <- append(list_pvalue, p_valeur)
+
 
 }
 
 p_underalpha <- sum(list_pvalue < 0.05)
 
-print(paste0("La puissance est de ", p_underalpha/length(list_pvalue) * 100,"%"))
+p_underalpha_cor <- sum(list_p_cor < 0.05)
+
+print(paste0("La puissance modele mixte est de ", p_underalpha/length(list_pvalue) * 100,"%"))
+
+#print(paste0("La puissance modele classique est de ", p_underalpha_cor/length(list_p_cor) * 100,"%"))
 ```
 
 
