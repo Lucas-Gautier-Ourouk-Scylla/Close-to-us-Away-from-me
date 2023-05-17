@@ -14,6 +14,8 @@ In this project, you can find :
  
  - "Intergroup_tables.Rmd" : A Markdown script for build the tables which are used in the Psytoolkit task to generate the visual material of the experiment: "Crowd and Intergroup Contexts". This script open the 120 tables built for the "Crowd, Social Class and Interdependency" experiment. For each of it we run a cluster analysis to dissociate two groups of points that could represent two social groups of people. We add these two clusters to the 120 tables but also create other conditions in which we aleatory substitute some points from the first cluster to the second (and vice versa) in order to build less "segregatory groups" in these tables. For that we used different replacement levels and added 5 new columns (that correspond to 5 different clustering conditions) to each table we finally use in our experiment
  
+ - "Minimal_Group_Estimation_Tables": A Markdown script for build the tables which are used in the Estimation task in order to assign participants in Orange VS Green conditions in the Minimal Group Paradigm
+ 
  
    ==> Folders:
  
