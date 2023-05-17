@@ -214,10 +214,14 @@ rm(list=setdiff(ls(), c("df"))) # clear workspace except the data frame
 ```
 
 
+test push
+
 ```{r}
 describe(df$Dependence1)
 
 explore(df)
+
+
 
 ```
 
