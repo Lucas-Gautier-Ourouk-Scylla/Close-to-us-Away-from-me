@@ -378,13 +378,13 @@ for (i in 1:length(ite_global)) {
 
   
   # PLOTTTTTTTING ------------------------
-  plot(f1$z)
-  p <- ggplot(table, aes(x= ord,y = abs * (-1))) + geom_point() + geom_density2d_filled(alpha = 0.5) + stat_density2d()
-  p + xlim(-400, 400)+ylim(-400, 400)
-  
-  
-  
-  gb <- ggplot_build(p + stat_density2d())$data[[2]]
+  # plot(f1$z)
+  # p <- ggplot(table, aes(x= ord,y = abs * (-1))) + geom_point() + geom_density2d_filled(alpha = 0.5) + stat_density2d()
+  # p + xlim(-400, 400)+ylim(-400, 400)
+  # 
+  # 
+  # 
+  # gb <- ggplot_build(p + stat_density2d())$data[[2]]
   density_gb <- 
   
   xlim <- range(f1$x)
@@ -522,4 +522,322 @@ rm(test_total_v2, test_total_v2_clean)
 #final_df <- cbind(sum_df, y_wide_wider)
 
 ```
+
+
+
+
+
+FUNCTION CREATION 
+
+
+
+```{r}
+#récupération de toutes les réponses du participant (matrice 30 x 2)
+n_trial <- 120
+resp_pp_matrix <- data.frame(abs = rnorm(n_trial, 0, sd= 100), 
+                      ord = rnorm(n_trial,0, sd = 100)
+                      )
+
+DF_EXP_function <- function(df = df ){
+
+
+
+
+
+
+files <- list()
+
+
+diam_1 <- 70
+diam_2 <- 170
+diam_3 <- 270
+
+
+min_distance_x1_list <- list()
+min_distance_x2_list <- list()
+min_distance_x3_list <- list()
+min_distance_x4_list <- list()
+min_distance_x5_list <- list()
+
+
+proximite_table_list <- list()
+cell_density_list <- list()
+dist_cell_max_list <- list()
+y <- data.frame()
+
+# tuto : min_distance[[2]] <- resp_pp_matrix
+
+ite <- c(1,2,
+         3,4,5,6,7,8,9,10,11,12,13,14,16,17,19,21,22,23,24,28,29,30,32,35,38,39,45,46)
+1:length(ite)
+
+paste0(ite,"x")
+
+ite_x <- paste0(ite,"xrot") 
+ite_y <- paste0(ite, "yrot")
+ite_xy <- paste0(ite, "xyrot")
+
+ite_chr <- as.character(ite)
+
+ite_global <- c(ite_x, ite_y, ite_xy, ite_chr)
+
+for (i in 1:length(ite_global)) {
+  
+  
+  for (j in ite_global) {
+      #load table i 
+    files[j] <- (paste0("~/Recherche/2022_09_16_distanceCS/07_distance-classe-sociale/07_distance-classe-sociale/experiments/stims/Top30/table",j,".txt"))
+    table <- data.frame()
+    table <- read.delim(files[[j]])
+    x_table <- table$abs
+    y_table <- table$ord
+  }
+
+  #choix du Pp
+  Ssx <- resp_pp_matrix[i,1]
+  Ssy <- resp_pp_matrix[i,2]
+  SSxy <- c(Ssx, Ssy)
+  SSxy
+  
+  #placement du point du participant 
+  table_Ss <- table
+  table_Ss[nrow(table) + 1, ] <- c(Ssx, Ssy)
+  
+  # Calcul distance : 
+  table_calc <- table
+  table_calc$distance <- c()
+  table_calc$distance <- sqrt(  (table_calc$abs - Ssx)^2 + (table_calc$ord- Ssy)^2 )
+
+#hist(table1_ex_calc$distance)
+#p <- ggplot(table1_ex_calc, aes(distance)) + geom_histogram(bins = 100)
+#p
+  min_dis_asc <- sort(table_calc$distance) #vecteur classé par ordre croissant pour récupérer les X plus petites distances
+
+  d_x1 <- min_dis_asc[1]
+  d_x2 <- min_dis_asc[2]
+  d_x3 <- min_dis_asc[3]
+  d_x4 <- min_dis_asc[4]
+  d_x5 <- min_dis_asc[5]
+  
+  #min_distance <- min(table_calc$distance)
+  min_distance_x1_list[[i]] <- d_x1
+  min_distance_x2_list[[i]] <- d_x2
+  min_distance_x3_list[[i]] <- d_x3
+  min_distance_x4_list[[i]] <- d_x4
+  min_distance_x5_list[[i]] <- d_x5
+
+  
+  
+# diam_1 2 3 définis avant 
+  
+  table_calc <- table_calc %>% mutate(proximite =
+                     case_when(distance <= diam_1 ~ "Close", 
+                               distance <= diam_2 ~ "Mid_proximity",
+                               distance <= diam_3 ~ "Far",
+                               distance >= diam_3 ~ "Out_of_range")
+)
+  
+  
+
+#tableau avec les nombres de "close" "mid_proximity" "far" "OOR" 
+  proximite_table <- data.frame("n" = c(rep(0,n_trial)))
+  proximite_table$n <- 0
+  proximite_table <- table_calc %>% count(proximite)
+  
+  if(nrow(proximite_table) < 4){
+    
+    if(nrow(proximite_table) < 3){
+      proximite_table <- rbind(c("Mid_proximity",0), proximite_table)
+      proximite_table <- rbind(c("Close",0), proximite_table)
+    }
+    
+    proximite_table <- rbind(c("Close",0), proximite_table)
+  }
+  
+  y <- rbind.data.frame(y, proximite_table)
+  
+  n <- 75 #75 pts par ecran
+  lims <- c(range(-400,400), range(-400,400))
+
+  f1 <- MASS::kde2d(x = table$abs, y = table$ord, lims = lims, n = 400) #creation d'une carte de densité de 75 x 75 cellules
+
+  
+  # PLOTTTTTTTING ------------------------
+  # plot(f1$z)
+  # p <- ggplot(table, aes(x= ord,y = abs * (-1))) + geom_point() + geom_density2d_filled(alpha = 0.5) + stat_density2d()
+  # p + xlim(-400, 400)+ylim(-400, 400)
+  # 
+  # 
+  # 
+  # gb <- ggplot_build(p + stat_density2d())$data[[2]]
+  density_gb <- 
+  
+  xlim <- range(f1$x)
+  ylim <- range(f1$y)
+  cell_size <- (diff(xlim) / n) * (diff(ylim) / n) #taille de chaque cellule 
+
+
+  table_Ss$abs <- as.numeric(table_Ss$abs)
+  table_Ss$ord <- as.numeric(table_Ss$ord)
+
+#obtention du rang pour x et y dans un tableau avec 76 points
+  rank_ss_x <- rank(table_Ss$abs)[76]  #faut il faire - 1 pour x et y pour remettre à l'échelle d'une carte 75 x 75 
+  rank_ss_y <- rank(table_Ss$ord)[76]
+
+  rank_ss <- c(rank_ss_x, rank_ss_y)
+
+
+#obtention de la densité au niveau de la case qu'occuperait le point sans prise en compte de celui ci pour le calcul 
+
+  cell_density_list[i] <- f1$z[rank_ss_x, rank_ss_y] * cell_size #densité a la cellule sélectionné 
+
+# Quel est la case à la plus haute densité 
+  max_f1 <- max(f1$z)
+  which(f1$z == max_f1)
+
+  max_cell <- which(f1$z == max_f1, arr.ind=TRUE)
+
+#distance between the 2 cells 
+  dist_cell_max_list[i] <- sqrt(  (max_cell[1] - rank_ss_x)^2 + (max_cell[2] - rank_ss_y)^2 )
+#dist_cell_max en terme de rang 
+  
+  print(i)
+
+}
+
+#### ------
+
+##### Recupérations des informations importantes 
+
+#min_distance_list
+#df_min_dis <- data.frame(min_distance_x1_list, colnames(ite))
+
+test_df_x1 <- data.frame(Reduce(rbind, min_distance_x1_list))
+test_df_x2 <- data.frame(Reduce(rbind, min_distance_x2_list))
+test_df_x3 <- data.frame(Reduce(rbind, min_distance_x3_list))
+test_df_x4 <- data.frame(Reduce(rbind, min_distance_x4_list))
+test_df_x5 <- data.frame(Reduce(rbind, min_distance_x5_list))
+
+test_df_x1_5 <- cbind(test_df_x1, test_df_x2, test_df_x3, test_df_x4, test_df_x5)
+colnames(test_df_x1_5)[1] <- "distance_min_x1"
+colnames(test_df_x1_5)[2] <- "distance_min_x2"
+colnames(test_df_x1_5)[3] <- "distance_min_x3"
+colnames(test_df_x1_5)[4] <- "distance_min_x4"
+colnames(test_df_x1_5)[5] <- "distance_min_x5"
+
+#test2 <- data.frame("x1" = min_distance_x1_list,
+#                    "x2" = min_distance_x2_list,
+#                    "x3" = min_distance_x3_list,
+#                    "x4" = min_distance_x4_list, 
+#                    "x5" = min_distance_x5_list)
+
+#min_distance_x1_list[[3]]
+
+
+
+
+
+test_df_x1_5$trial_num <- c(1:n_trial) #new col with trial num 
+test_df_x1_5 <- test_df_x1_5[, c(6,1,2,3,4,5)]
+
+
+
+#view(df_min_dis)
+#view(test_df_x1_5)
+
+#View(y)
+y$trial_num <- rep(c(1:n_trial), each = 4)
+
+data_wide_y <- spread(y, proximite, n)
+
+test_total <- cbind(test_df_x1_5, data_wide_y)
+#colnames(test_total)[2] <- "distance_min_x1"
+
+#y_wide <- y %>%
+#  pivot_wider(names_from = proximite, values_from = n)
+
+#y_wide_wider <- y_wide %>%
+#  pivot_wider(names_from = id,
+#              values_from = c(Close, Far, Mid_proximity, `Out of range`))
+
+#View(y_wide_wider)
+
+#cell_density_list
+df_density <- data.frame(cell_density_list)
+df_density_2 <- data.frame(Reduce(rbind, cell_density_list))
+
+test_total_v2 <- cbind(test_total, df_density_2)
+
+#dist_cell_max_list
+df_dist_cell <- data.frame(Reduce(rbind, dist_cell_max_list))
+test_total_v2 <- cbind(test_total_v2, df_dist_cell)
+
+colnames(test_total_v2)[12] <- "density cell"
+colnames(test_total_v2)[13] <- "dist_max_density"
+
+rm(list=setdiff(ls(), c("test_total_v2", "sum_df")))
+
+#test_total_v2
+
+
+test_total_v2$id_part <- 1 # tableau pour participant 1 
+test_total_v2_clean <- test_total_v2[, c(14,1,2,3,4,5,6,7,8,9,10,11,12,13)]
+
+test_total_v2_clean$Close <- as.numeric(test_total_v2_clean$Close)
+test_total_v2_clean$Far <- as.numeric(test_total_v2_clean$Far)
+test_total_v2_clean$Mid_proximity <- as.numeric(test_total_v2_clean$Mid_proximity)
+test_total_v2_clean$Out_of_range <- as.numeric(test_total_v2_clean$Out_of_range)
+
+
+test_total_v2_clean <- test_total_v2_clean %>% rowwise() %>%
+  mutate(sum_trial = sum(c_across(Close:Out_of_range)))
+
+df <- test_total_v2_clean
+
+rm(test_total_v2, test_total_v2_clean)
+
+
+#format wide de toutes les données 42 variables = 14 x 3 (3 variables (tout sauf les disque) )
+#sum_df <- data.frame("df_min" = df_min_dis,
+ #                    "df_density" = df_density,
+  #                   "df_dist_cell" = df_dist_cell)
+
+#View(sum_df)
+
+#final_df <- cbind(sum_df, y_wide_wider)
+
+return(df)
+}
+
+```
+
+
+test fct
+```{r}
+
+test <- DF_EXP_function(df = resp_pp_matrix)
+
+```
+
+
+```{r}
+test_1 <- read.table("Data/experiment_data/CrowdSpace.2022-11-23-1833.data.9939755a-c764-4d7b-9dc0-bed39f2dbc7d.txt", sep = " ")
+
+test_1 <- test_1 %>% rename(
+  abs = V6,
+  ord = V7,
+  RT = V1,
+  screen = V2,
+  type = V3
+  
+)
+
+# pivot wider
+
+test_1 <- test_1 %>% 
+
+```
+
+
+
 
