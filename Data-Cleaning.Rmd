@@ -4,6 +4,8 @@ author: "Lucas Gautier, Victor Auger, Rhéa Haddad"
 date: '2022-11-24'
 output: html_document
 ---
+Introduction
+
 This script is the data cleaning of the project "Close-to-Us-Away-From-Me".
 The Aim of this project is to study the influence of social class and self-models (independence/interdependence) on proxemic preferences
 
