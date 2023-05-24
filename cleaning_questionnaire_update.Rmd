@@ -275,6 +275,7 @@ df$Connection <- rowMeans(df[,c("Connection1", "Connection2", "Connection3", "Co
 df$MoneyPb <- rowMeans(df[,c("Money_Pb1", "Money_Pb2", "Money_Pb3", "Money_Pb4", "Money_Pb5", "Money_Pb6", "Money_Pb7", "Money_Pb8", "Money_Pb9", "Money_Pb10")], na.rm=TRUE)
 df$Similarity <- rowMeans(df[,c("Similarity1", "Similarity2", "Similarity3", "Similarity4", "Similarity5", "Similarity6", "Similarity7")], na.rm=TRUE)
 
+df$id <- df$Exp_Name
 
 write.csv(df, file = "questionnaire_df.csv")
 ```
