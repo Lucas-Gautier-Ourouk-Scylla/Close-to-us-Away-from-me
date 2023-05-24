@@ -91,7 +91,7 @@ PESS:
 - PESS8: I worry about not having enough money
 
 ```{r}
-#tmp <- df <- read_csv("Data/data.csv")
+tmp <- df <- read_csv("Data/data.csv")
 
 tmp <- df
 
@@ -241,7 +241,7 @@ rm(list=setdiff(ls(), c("df"))) # clear workspace except the data frame
 ```{r}
 describe(df$Dependence1)
 
-explore(df)
+#explore(df)
 
 ```
 
@@ -276,5 +276,6 @@ df$MoneyPb <- rowMeans(df[,c("Money_Pb1", "Money_Pb2", "Money_Pb3", "Money_Pb4",
 df$Similarity <- rowMeans(df[,c("Similarity1", "Similarity2", "Similarity3", "Similarity4", "Similarity5", "Similarity6", "Similarity7")], na.rm=TRUE)
 
 
+write.csv(df, file = "questionnaire_df.csv")
 ```
 
