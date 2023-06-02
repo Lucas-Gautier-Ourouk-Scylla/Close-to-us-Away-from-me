@@ -4,14 +4,10 @@ author: "Lucas Gautier, Victor Auger, Rhéa Haddad"
 date: '2022-11-24'
 output: html_document
 ---
-Introduction
-
 This script is the data cleaning of the project "Close-to-Us-Away-From-Me".
 The Aim of this project is to study the influence of social class and self-models (independence/interdependence) on proxemic preferences
 
-
-This script is the data cleaning of the project "Close-to-Us-Away-From-Me".
-The Aim of this project is to study the influence of social class and self-models (independence/interdependence) on proxemic preferences
+v2
 
 
 ```{r}
@@ -28,7 +24,7 @@ rm(list=ls()) # clear workspace
 # 2nd row : Creates a list of packages that have not been installed yet (new packages)
 # 3rd row : Installs the new packages
 # 4th row : Loads all the listed packages
-list.of.packages <- c("dplyr", "emmeans", "tidyverse", "readr", "psych", "lmerTest", 'explore')
+list.of.packages <- c("dplyr", "emmeans", "tidyverse", "readr", "psych", "lmerTest")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 invisible(lapply(list.of.packages, require, character.only = TRUE))
@@ -94,10 +90,10 @@ PESS:
 - PESS7: I can't stop thinking about the lack of money
 - PESS8: I worry about not having enough money
 
-
 ```{r}
 tmp <- df <- read_csv("Data/data.csv")
 
+tmp <- df
 
 names(tmp)[1] <- "Participant"
 names(tmp)[2] <- "Exp_Name"
@@ -188,6 +184,29 @@ rm(list=setdiff(ls(), c("df"))) # clear workspace except the data frame
 
 ```
 
+
+```{r}
+#reverse inverse items
+df$Dependence1 <- 8 - df$Dependence1
+df$Dependence2 <- 8 - df$Dependence2
+df$Dependence3 <- 8 - df$Dependence3
+df$Dependence5 <- 8 - df$Dependence5
+
+df$Connection1 <- 8 - df$Connection1
+df$Connection6 <- 8 - df$Connection6
+df$Connection7 <- 8 - df$Connection7
+df$Connection8 <- 8 - df$Connection8
+df$Connection11 <- 8 - df$Connection11
+df$Connection13 <- 8 - df$Connection13
+
+df$Similarity1 <- 8 - df$Similarity1
+df$Similarity2 <- 8 - df$Similarity2
+df$Similarity3 <- 8 - df$Similarity3
+df$Similarity4 <- 8 - df$Similarity4
+
+```
+
+
 Create composite scores
 
 ```{r}
@@ -219,15 +238,45 @@ rm(list=setdiff(ls(), c("df"))) # clear workspace except the data frame
 ```
 
 
-test push
-
 ```{r}
 describe(df$Dependence1)
 
-explore(df)
-
-
+#explore(df)
 
 ```
 
 Ctrl + Alt + I : nouveau chunk
+```{r}
+#cronbach's alpha
+library(ltm)
+
+df_PESS <- data.frame(PESS1=c(df$PESS1), PESS2=c(df$PESS2), PESS3=c(df$PESS3), PESS4=c(df$PESS4), PESS5=c(df$PESS5), PESS6=c(df$PESS6), PESS7=c(df$PESS7), PESS8=c(df$PESS8))
+cronbach.alpha(df_PESS, na.rm=T)
+
+df_Dependence <- data.frame(Dependence1=c(df$Dependence1), Dependence2=c(df$Dependence2), Dependence3=c(df$Dependence3), Dependence4=c(df$Dependence4), Dependence5=c(df$Dependence5), Dependence6=c(df$Dependence6), Dependence7=c(df$Dependence7), Dependence8=c(df$Dependence8), Dependence9=c(df$Dependence9))
+cronbach.alpha(df_Dependence, na.rm=T)
+
+df_Connection <- data.frame(Connection1=c(df$Connection1), Connection2=c(df$Connection2), Connection3=c(df$Connection3), Connection4=c(df$Connection4), Connection5=c(df$Connection5), Connection6=c(df$Connection6), Connection7=c(df$Connection7), Connection8=c(df$Connection8), Connection9=c(df$Connection9), Connection10=c(df$Connection10), Connection11=c(df$Connection11), Connection12=c(df$Connection12), Connection13=c(df$Connection13), Connection14=c(df$Connection14))
+cronbach.alpha(df_Connection, na.rm=T)
+
+df_MoneyPb <- data.frame(MoneyPb_1=c(df$Money_Pb1), MoneyPb_2=c(df$Money_Pb2), MoneyPb_3=c(df$Money_Pb3), MoneyPb_4=c(df$Money_Pb4), MoneyPb_5=c(df$Money_Pb5), MoneyPb_6=c(df$Money_Pb6), MoneyPb_7=c(df$Money_Pb7), MoneyPb_8=c(df$Money_Pb8), MoneyPb_9=c(df$Money_Pb9), MoneyPb_10=c(df$Money_Pb10))
+cronbach.alpha(df_MoneyPb, na.rm=T)
+
+df_Similarity <- data.frame(Similarity1=c(df$Similarity1), Similarity2=c(df$Similarity2), Similarity3=c(df$Similarity3), Similarity4=c(df$Similarity4), Similarity5=c(df$Similarity5), Similarity6=c(df$Similarity6), Similarity7=c(df$Similarity7))
+cronbach.alpha(df_Similarity, na.rm=T)
+```
+
+
+```{r}
+#composite scores with means
+df$PESS <- rowMeans(df[,c("PESS1", "PESS2", "PESS3", "PESS4", "PESS5", "PESS6", "PESS7", "PESS8")], na.rm=TRUE)
+df$Dependence <-  rowMeans(df[,c("Dependence1", "Dependence2", "Dependence3", "Dependence4", "Dependence5", "Dependence6", "Dependence7", "Dependence8", "Dependence9")], na.rm=TRUE)
+df$Connection <- rowMeans(df[,c("Connection1", "Connection2", "Connection3", "Connection4", "Connection5", "Connection6", "Connection7", "Connection8", "Connection9", "Connection10", "Connection11", "Connection12", "Connection13", "Connection14")], na.rm=TRUE)
+df$MoneyPb <- rowMeans(df[,c("Money_Pb1", "Money_Pb2", "Money_Pb3", "Money_Pb4", "Money_Pb5", "Money_Pb6", "Money_Pb7", "Money_Pb8", "Money_Pb9", "Money_Pb10")], na.rm=TRUE)
+df$Similarity <- rowMeans(df[,c("Similarity1", "Similarity2", "Similarity3", "Similarity4", "Similarity5", "Similarity6", "Similarity7")], na.rm=TRUE)
+
+df$id <- df$Exp_Name
+
+write.csv(df, file = "questionnaire_df.csv")
+```
+

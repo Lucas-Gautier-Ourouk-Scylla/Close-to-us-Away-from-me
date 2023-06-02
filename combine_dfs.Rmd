@@ -1,0 +1,36 @@
+---
+title: "Combine_dfs"
+author: "Victor Auger"
+date: "24/05/2023"
+output: html_document
+---
+
+
+Combine the 2 dfs : 
+
+```{r}
+df_quest <- read.csv("questionnaire_df.csv")
+
+df_exp <- read.csv("DF_exp.csv")
+
+```
+
+For the df_qest rename Participant to id_code and id to Participant
+
+```{r}
+df_quest$Participant_id <- df_quest$Participant
+df_quest$Participant <- df_quest$id
+```
+
+We should be able to match EXP and QUEST DFS
+
+```{r}
+df_combined <- left_join(df_exp,df_quest, by = "Participant")
+```
+
+Write the full df 
+
+```{r}
+write.csv(df_combined, file="combined_df.csv")
+```
+

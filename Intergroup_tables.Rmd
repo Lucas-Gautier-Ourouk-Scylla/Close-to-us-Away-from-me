@@ -4,6 +4,7 @@ author: "Lucas Gautier, Victor Auger, Rhéa Haddad"
 date: '2022-12-27'
 output: html_document
 ---
+A script to creat tables that are used in the "Crowd and Intergroup Contexts" experiment
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

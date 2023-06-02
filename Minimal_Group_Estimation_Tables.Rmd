@@ -1,0 +1,44 @@
+---
+title: "Minimal_Group_Estimation_Tables"
+author: "Ourouk Scylla Lucas Gautier"
+date: '2023-05-04'
+output: html_document
+---
+
+The aim of this Markdown script is to build the tables which are used in the Estimation task in order to assign participants in Orange VS Green conditions in the Minimal Group Paradigm
+After these table buildings, we used Psytoolkit software in order to make appear points on each table coordinate and then we made a screenshot of these screens in order to build our stimuli
+
+
+```{r}
+
+library(withr)
+library(ggplot2)
+
+######################################################
+
+################   Randomly assign partiipants in a space 
+
+List = list() # Create an empty list
+
+
+Nbppt_List <- with_seed(42, sample(50:150, 10, replace=FALSE))
+
+for (i in c(Nbppt_List)) { 
+  Nbppt <- i
+  Ordonnee <- with_seed(i, round(runif(Nbppt, -300, 300), digits = 0))
+  Abscisse <- with_seed(i*i, round(runif(Nbppt, -400, 400), digits = 0))
+  df<- data.frame(Abscisse, Ordonnee)
+  
+  plot_gen <- ggplot(df, aes(x=Abscisse, y=Ordonnee)) +
+    geom_point(size=3,color=1, shape=23)
+  print(plot_gen)
+  
+  write.table(df, file = paste("Stimuli/MinimalGroup_Estimation_Tables/MiniGroup_Estimation", i, ".txt", sep = ""), sep = "\t",row.names = FALSE)
+  
+  List[[length(List)+1]] = i
+  
+  rm(list=setdiff(ls(), c("Nbppt_List", "List"))) # clear workspace except the data frame
+}
+
+
+```
