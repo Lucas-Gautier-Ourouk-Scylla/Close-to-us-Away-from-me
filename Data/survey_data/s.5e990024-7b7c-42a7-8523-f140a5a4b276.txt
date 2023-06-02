@@ -1,0 +1,17 @@
+version: 3.4.2
+server-time: 2022-11-24-20-26
+user_agent: mozilla/5.0 (windows nt 6.1; win64; x64; rv:107.0) gecko/20100101 firefox/107.0
+screen_width: 0
+screen_height: 0
+html_width: 0
+html_height: 0
+user_time: 0
+T: 0
+l: Experiment_Beginning
+stime: 2022-11-24-20-26
+T: 24651
+t: info
+l: Experiment_Beginning
+stime: 2022-11-24-20-27
+T: 836
+t: info

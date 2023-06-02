@@ -43,8 +43,10 @@ set.seed(42) # set overall random seed for reproducibility
 # Open one table and build a dataframe
 # df <- read_delim("Stimuli/Social_Class_Tables/table5.txt", delim = "\t", escape_double = FALSE, 
 #     trim_ws = TRUE)
-df <- read_table("Stimuli/Social_Class_Tables/table5.txt")
+df <- read_table("Stimuli/Social_Class_Tables/table1.txt")
 
+  names(df)[1] <- "abs"
+  names(df)[2] <- "ord"
 
 dataCA <- df # Rename this dataframe for running the cluster analysis
 
@@ -111,9 +113,13 @@ SegLow <- ggplot(df, aes(x=abs, y=ord, shape=Clust2, color=Seg_Low)) +
 SegNo <- ggplot(df, aes(x=abs, y=ord, shape=Clust2, color=Seg_No)) +
   geom_point()
 
-# write.table(df, file = "Stimuli/Intergroup_Tables/table52.txt", sep = "\t",row.names = FALSE) #Use tabula column separator
+# write.table(df, file = "Stimuli/Intergroup_Tables/table52.txt", sep = "\t",row.names = FALSE, quote = FALSE, col.names = paste0("\"", names(df), "\"")) #Use tabula column separator
 
 ```
+
+
+
+
 
 # Opening all the files
 
@@ -131,6 +137,9 @@ for (i in Filelist) {
   # df <- read_delim(paste("Stimuli/Social_Class_Tables/",i, sep = ""), delim = "\t", escape_double = FALSE, 
   #                  trim_ws = TRUE)
   df <- read_table(paste("Stimuli/Social_Class_Tables/",i, sep = ""))
+  
+  names(df)[1] <- "abs"
+  names(df)[2] <- "ord"
   
   dataCA <- df # Rename this dataframe for running the cluster analysis
   
@@ -159,24 +168,36 @@ for (i in Filelist) {
                                            Segregation == "Green" & runif(n()) < 0.10 ~ "Orange",
                                            TRUE ~ Segregation))
   
+  df <- df %>% mutate(Seg_High_Nb = case_when(Seg_High == "Orange" ~ 1,
+                                              Seg_High == "Green" ~ 2))
+  
   
   df <- df %>% mutate(Seg_Medium = case_when(Segregation == "Orange" & runif(n()) < 0.20 ~ "Green",
                                              Segregation == "Green" & runif(n()) < 0.20 ~ "Orange",
                                              TRUE ~ Segregation))
   
+  df <- df %>% mutate(Seg_Medium_Nb = case_when(Seg_Medium == "Orange" ~ 1,
+                                                Seg_Medium == "Green" ~ 2))
   
   
   df <- df %>% mutate(Seg_Low = case_when(Segregation == "Orange" & runif(n()) < 0.35 ~ "Green",
                                           Segregation == "Green" & runif(n()) < 0.35 ~ "Orange",
                                           TRUE ~ Segregation))
   
+  df <- df %>% mutate(Seg_Low_Nb = case_when(Seg_Low == "Orange" ~ 1,
+                                             Seg_Low == "Green" ~ 2))
   
   
   df <- df %>% mutate(Seg_No = case_when(Segregation == "Orange" & runif(n()) < 0.50 ~ "Green",
                                          Segregation == "Green" & runif(n()) < 0.50 ~ "Orange",
                                          TRUE ~ Segregation))
   
-  write.table(df, file = paste("Stimuli/Intergroup_Tables/", i, sep = ""), sep = "\t",row.names = FALSE)
+  df <- df %>% mutate(Seg_No_Nb = case_when(Seg_No == "Orange" ~ 1,
+                                            Seg_No == "Green" ~ 2))
+  
+  
+  
+  write.table(df, file = paste("Stimuli/Intergroup_Tables/", i, sep = ""), sep = "\t",row.names = FALSE, quote = FALSE, col.names = paste0("\"", names(df), "\""))
   
   List[[length(List)+1]] = i
   
@@ -186,4 +207,72 @@ for (i in Filelist) {
   
 ```
 
+# Build tables with a different partitioning
+
+```{r}
+
+# Create a file containing each file name present in the folder
+Filelist <- list.files(path = "Stimuli/Social_Class_Tables/") 
+# Give the number of file in the folder (it's also the number of participants)
+Nb_File<- length(Filelist)
+
+List = list() # Create an empty list
+
+for (i in Filelist) {
+  # Open one table and build a dataframe
+  # df <- read_delim(paste("Stimuli/Social_Class_Tables/",i, sep = ""), delim = "\t", escape_double = FALSE, 
+  #                  trim_ws = TRUE)
+  df <- read_table(paste("Stimuli/Social_Class_Tables/",i, sep = ""))
+  
+  names(df)[1] <- "abs"
+  names(df)[2] <- "ord"
+  
+  dataCA <- df # Rename this dataframe for running the cluster analysis
+  
+  ###############################
+  
+  # Cluster analysis (K-Means methode)
+  fit2 <- kmeans(dataCA, 2) # Build a cluster partitioning of the dataframe (based on X and Y variables) with 2 categories (= 2 clusters)
+  df$Clust2 <- fit2$cluster # Add the clustering number for each row ao the dataframe
+  str(df) # Give the structure of the dataframe
+  
+  # Extraction des moyennes de chaque cluster sur les variables d'interet
+  clus2 <- aggregate(dataCA,by=list(fit2$cluster),FUN=mean) # Calculate the centromere (= the mean position) of each cluster 
+  clus2 <- round(clus2, 2) # round the result to two decimals
+  clus2 # print x-position and y-position of the centromere of these two clusters
+  
+  addmargins(table(df$Clust2)) # Give the number of points in each cluster 
+  round(addmargins(prop.table(table(df$Clust2))),2) # Give the proportion of points in each cluster
+  
+  
+  # Build a new variable renaming Cluster "1" and "2" to cluster "Orange" and "Green"
+  df <- df %>% mutate(Segregation = case_when(Clust2 == "1" ~ "Orange",
+                                              Clust2 == "2" ~ "Green"))
+  
+  df <- df %>% mutate(Dominant_High = case_when(Segregation == "Orange" & runif(n()) < 0.10 ~ "Green",
+                                                Segregation == "Green" & runif(n()) < 0.85 ~ "Orange",
+                                                TRUE ~ Segregation))
+  
+    df <- df %>% mutate(Dominant_High_Nb = case_when(Dominant_High == "Orange" ~ 1,
+                                              Dominant_High == "Green" ~ 2))
+
+
+df <- df %>% mutate(Dominant_Medium = case_when(Segregation == "Orange" & runif(n()) < 0.15 ~ "Green",
+                                             Segregation == "Green" & runif(n()) < 0.70 ~ "Orange",
+                                             TRUE ~ Segregation))
+
+  df <- df %>% mutate(Dominant_Medium_Nb = case_when(Dominant_Medium == "Orange" ~ 1,
+                                              Dominant_Medium == "Green" ~ 2))
+  
+
+  
+  write.table(df, file = paste("Stimuli/Asymmetric_Partitioning/", i, sep = ""), sep = "\t",row.names = FALSE, quote = FALSE, col.names = paste0("\"", names(df), "\""))
+  
+  List[[length(List)+1]] = i
+  
+  rm(list=setdiff(ls(), c("Filelist", "Nb_File", "List"))) # clear workspace except the data frame
+}
+  
+
+```
 

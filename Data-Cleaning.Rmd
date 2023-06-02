@@ -10,6 +10,9 @@ This script is the data cleaning of the project "Close-to-Us-Away-From-Me".
 The Aim of this project is to study the influence of social class and self-models (independence/interdependence) on proxemic preferences
 
 
+This script is the data cleaning of the project "Close-to-Us-Away-From-Me".
+The Aim of this project is to study the influence of social class and self-models (independence/interdependence) on proxemic preferences
+
 
 ```{r}
 
@@ -25,7 +28,7 @@ rm(list=ls()) # clear workspace
 # 2nd row : Creates a list of packages that have not been installed yet (new packages)
 # 3rd row : Installs the new packages
 # 4th row : Loads all the listed packages
-list.of.packages <- c("dplyr", "emmeans", "tidyverse", "readr", "psych", "lmerTest")
+list.of.packages <- c("dplyr", "emmeans", "tidyverse", "readr", "psych", "lmerTest", 'explore')
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 invisible(lapply(list.of.packages, require, character.only = TRUE))
